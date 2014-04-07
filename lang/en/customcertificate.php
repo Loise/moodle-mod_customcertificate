@@ -67,16 +67,6 @@ $string['secondpagey'] = 'Certificate Back Text Vertical Position';
 $string['secondtextposition'] = 'Certificate Back Text Position';
 $string['secondtextposition_help'] = 'These are the XY coordinates (in millimeters) of the certificate back page text';
 
-//QR Code
-$string['disablecode'] = 'Disable Certificate QR Code';
-$string['disablecode_help'] = 'Disable/enable certificate QR Code generation';
-$string['codex'] = 'Certificate QR Code Horizontal Position';
-$string['codey'] = 'Certificate QR Code Vertical Position';
-$string['qrcodeposition'] = 'Certificate QR Code Position';
-$string['qrcodeposition_help'] = 'These are the XY coordinates (in millimeters) of the certificate QR Code';
-$string['defaultcodex'] = 'Default Hotizontal QR code Position';
-$string['defaultcodey'] = 'Default Vertical QR code Position';
-
 ////Date options
 $string['issueddate'] = 'Date Issued';
 $string['completiondate'] = 'Course Completion';

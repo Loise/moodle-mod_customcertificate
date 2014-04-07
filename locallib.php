@@ -78,9 +78,6 @@ class customcertificate {
     public $requiredtime;
     public $certgrade;
     public $gradefmt;
-    public $codex;
-    public $codey;
-    public $disablecode;
     public $enablesecondpage;
     public $secondpagex;
     public $secondpagey;
@@ -567,32 +564,6 @@ class customcertificate {
                 $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->secondpagetext), 0, 0, 0, true, 'C');
             }
         }
-
-        /*  Loïse et Cedric
-
-        if (empty($this->disablecode)) {
-            //Add certificade code using QRcode, in a new page (to print in the back)
-            if (empty($this->enablesecondpage)) {
-                //If secondpage is disabled, create one
-                $pdf->AddPage();
-            }
-            $style = array(
-                    'border' => 2,
-                    'vpadding' => 'auto',
-                    'hpadding' => 'auto',
-                    'fgcolor' => array(0, 0, 0),
-                    'bgcolor' => false, //array(255,255,255)
-                    'module_width' => 1, // width of a single module in points
-                    'module_height' => 1 // height of a single module in points
-            );
-            $codeurl = "$CFG->wwwroot/mod/customcertificate/verify.php?code=$issuecert->code";
-            $pdf->write2DBarcode($codeurl, 'QRCODE,H', $this->codex, $this->codey, 50, 50, $style, 'N');
-            $pdf->setFontSize(10);
-            $pdf->setFontStretching(75);
-            $pdf->Text($this->codex - 1, $this->codey + 50, $issuecert->code);
-        }
-
-        */
 
         return $pdf;
     }

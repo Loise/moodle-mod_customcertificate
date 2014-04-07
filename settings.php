@@ -48,14 +48,6 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configtext('customcertificate/certlifetime', get_string('certlifetime', 'customcertificate'),
         get_string('certlifetime_help', 'customcertificate'), 60, PARAM_INT));
-    
-    //QR CODE
-    $settings->add(new admin_setting_configcheckbox('customcertificate/disablecode',
-        get_string('disablecode', 'customcertificate'), get_string('disablecode_help', 'customcertificate'), 0));
-    $settings->add(new admin_setting_configtext('customcertificate/codex', get_string('defaultcodex', 'customcertificate'),
-        get_string('qrcodeposition_help', 'customcertificate'), 10, PARAM_INT));
-    $settings->add(new admin_setting_configtext('customcertificate/codey', get_string('defaultcodey', 'customcertificate'),
-        get_string('qrcodeposition_help', 'customcertificate'), 10, PARAM_INT));
 
 	//Certificate back page
     $settings->add(new admin_setting_configcheckbox('customcertificate/enablesecondpage',

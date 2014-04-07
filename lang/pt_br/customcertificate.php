@@ -60,16 +60,6 @@ $string['secondpagey'] = 'Posição Vertical do texto do verso';
 $string['secondtextposition'] = 'Posição do texto do verso';
 $string['secondtextposition_help'] = 'As coordenadas XY (em milímetros) do texto do verso';
 
-//QR Code
-$string['disablecode'] = 'Desabilitar o QR Code do certificado';
-$string['disablecode_help'] = 'Habilita ou desabilita a geração do QR Code do certificado';
-$string['codex'] = 'Posição Horizontal do QR Code do Certificado';
-$string['codey'] = 'Posição Vertical do QR Code do Certificado';
-$string['qrcodeposition'] = 'Posicionamento do QR Code do Certificado';
-$string['qrcodeposition_help'] = 'Essas são as coordenadas XY (em milímetros) do QR Code do certificado';
-$string['defaultcodex'] = 'Posição Horizontal padrão do QR code do certificado';
-$string['defaultcodey'] = 'Posição Vertical padrão do QR code do certificado';
-
 ////Date options
 $string['issueddate'] = 'Data da emissão';
 $string['completiondate'] = 'Data do fim do curso';
