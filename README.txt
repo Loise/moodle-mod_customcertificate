@@ -37,5 +37,3 @@ Place this folder in your mod folder in your Moodle directory.
 nb. The reason this is not the recommended method is due to the fact you have
 to over-write the contents of this folder to apply any future updates to the customcertificate
 module. In the above method there is a simple command to update the files.
-
-Blavla
