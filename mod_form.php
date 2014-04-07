@@ -121,43 +121,6 @@ class mod_customcertificate_mod_form extends moodleform_mod {
         $mform->setAdvanced('conclucertificatetexty');
         $mform->addHelpButton('conclucertificatetexty', 'textposition', 'customcertificate');
 
-        //-----------------------------------------Second page
-        $mform->addElement('header', 'secondpageoptions', get_string('secondpageoptions', 'customcertificate'));
-        //Enable back page text
-
-        $mform->addElement('selectyesno', 'enablesecondpage', get_string('enablesecondpage', 'customcertificate'));
-        $mform->setDefault('enablesecondpage', get_config('customcertificate', 'enablesecondpage'));
-        $mform->addHelpButton('enablesecondpage', 'enablesecondpage', 'customcertificate');
-
-        //Certificate secondimage file
-        $mform->addElement('filepicker', 'secondimage', get_string('secondimage','customcertificate'), null,
-                array('maxbytes' => $maxbytes, 'accepted_types' =>  array('image')));
-        $mform->addHelpButton('secondimage', 'secondimage', 'customcertificate');
-        $mform->disabledIf('secondimage', 'enablesecondpage', 'eq', 0);
-         
-        //Certificate secondText HTML editor
-        $mform->addElement('editor', 'secondpagetext', get_string('secondpagetext', 'customcertificate'),
-                customcertificate_get_editor_options($this->context));
-        $mform->setType('secondpagetext',PARAM_RAW);
-        $mform->addHelpButton('secondpagetext', 'certificatetext', 'customcertificate');
-        $mform->disabledIf('secondpagetext', 'enablesecondpage', 'eq', 0);
-
-        //Certificate Position X
-        $mform->addElement('text', 'secondpagex', get_string('secondpagex', 'customcertificate'), array('size'=>'5'));
-        $mform->setType('secondpagex',PARAM_INT);
-        $mform->setDefault('secondpagex', get_config('customcertificate', 'certificatetextx'));
-        $mform->setAdvanced('secondpagex');
-        $mform->addHelpButton('secondpagex', 'secondtextposition', 'customcertificate');
-        $mform->disabledIf('secondpagex', 'enablesecondpage', 'eq', 0);
-
-        //Certificate Position Y
-        $mform->addElement('text', 'secondpagey', get_string('secondpagey', 'customcertificate'), array('size'=>'5'));
-        $mform->setType('secondpagey',PARAM_INT);
-        $mform->setDefault('secondpagey', get_config('customcertificate', 'certificatetexty'));
-        $mform->setAdvanced('secondpagey');
-        $mform->addHelpButton('secondpagey', 'secondtextposition', 'customcertificate');
-        $mform->disabledIf('secondpagey', 'enablesecondpage', 'eq', 0);
-
         //-------------------------------Issue options----------------------------------
 
         $mform->addElement('header', 'issueoptions', get_string('issueoptions', 'customcertificate'));
@@ -224,18 +187,6 @@ class mod_customcertificate_mod_form extends moodleform_mod {
             $data['certificatetext'] = array('text' =>$data['certificatetext'], 'format'=> FORMAT_HTML);
 	    $data['introcertificatetext'] = array('text' =>$data['introcertificatetext'], 'format'=> FORMAT_HTML); 
             $data['conclucertificatetext'] = array('text' =>$data['conclucertificatetext'], 'format'=> FORMAT_HTML); 
-	
-            //Second page
-            $secondimagedraftitemid = file_get_submitted_draft_itemid('secondimage');
-            $secondimagefileinfo = customcertificate::get_certificate_secondimage_fileinfo($this->context);
-            file_prepare_draft_area($secondimagedraftitemid, $secondimagefileinfo['contextid'], $secondimagefileinfo['component'], $secondimagefileinfo['filearea'], $secondimagefileinfo['itemid']);
-            $data['secondimage'] = $secondimagedraftitemid;
-
-            if (!empty($data['secondpagetext'])) {
-                $data['secondpagetext'] = array('text' =>$data['secondpagetext'], 'format'=> FORMAT_HTML);
-            } else {
-                $data['secondpagetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
-            }
         } else { //Load default
             $data['certificatetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
 	    $data['introcertificatetext'] = array('text' =>'', 'format'=> FORMAT_HTML);

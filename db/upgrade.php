@@ -25,48 +25,6 @@ function xmldb_customcertificate_upgrade($oldversion=0) {
         
         $table = new xmldb_table('customcertificate');
         
-        $field = new xmldb_field('enablesecondpage', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'codey');
-
-        // Conditionally launch add field enablesecondpage
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-        
-         $field = new xmldb_field('secondpagex', XMLDB_TYPE_INTEGER, '4', null, null, null, '10', 'enablesecondpage');
-
-        // Conditionally launch add field secondpagex
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        $field = new xmldb_field('secondpagey', XMLDB_TYPE_INTEGER, '4', null, null, null, '50', 'secondpagex');
-
-        // Conditionally launch add field secondpagey
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-        
-         $field = new xmldb_field('secondpagetext', XMLDB_TYPE_TEXT, null, null, null, null, null, 'secondpagey');
-
-        // Conditionally launch add field secondpagetext
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-        
-         $field = new xmldb_field('secondpagetextformat', XMLDB_TYPE_TEXT, null, null, null, null, null, 'secondpagetext');
-
-        // Conditionally launch add field secondpagetextformat
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-        
-        $field = new xmldb_field('secondimage', XMLDB_TYPE_TEXT, null, null, null, null, null, 'secondpagetextformat');
-        
-        // Conditionally launch add field secondimage
-        if (!$dbman->field_exists($table, $field)) {
-        	$dbman->add_field($table, $field);
-        }
-        
         // Changing type of field certdatefmt on table customcertificate to char
         $field = new xmldb_field('certdatefmt', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, 'certdate');
         

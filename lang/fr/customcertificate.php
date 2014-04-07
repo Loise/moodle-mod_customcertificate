@@ -54,19 +54,6 @@ $string['intro'] = 'Description';
 $string['printoutcome'] = 'Imprimer le résultat';
 $string['printdate'] = 'Imprimer la date';
 
-//Second Page
-$string['secondpageoptions'] = 'Verso du certificat';
-$string['enablesecondpage'] = 'Activer le verso du certificat';
-$string['enablesecondpage_help'] = 'Activer l\'édition du verso du certificat, s\'il est désactivé, seul le QR code du certificat sera imprimé sur le verso (si le QR code est activée)';
-$string['secondimage'] = 'Fichier image du verso du certificat';
-$string['secondimage_help'] = 'Cette image sera utilisé par le verso du certificat';
-$string['secondpagetext'] = 'Texte du verso du certificat';
-
-$string['secondpagex'] = 'Position horizontale du texte du verso du certificat';
-$string['secondpagey'] = 'Position verticale du texte du verso du certificat';
-$string['secondtextposition'] = 'Position du text du verso du certificat';
-$string['secondtextposition_help'] = 'Ce sont les coordonées XY (en millimètres) du texte du verso du certificat';
-
 ////Date options
 $string['issueddate'] = 'Date de publication';
 $string['completiondate'] = 'Achèvement de cours';

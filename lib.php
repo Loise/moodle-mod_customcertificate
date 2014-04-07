@@ -68,30 +68,6 @@ function customcertificate_add_instance(stdclass $certificate, $mform=null) {
         $images = customcertificate_process_form_files($mform, $context);
     }
     $certificate->certificateimage = $images[0];
-
-    
-    //Second Page
-    if (!empty($certificate->enablesecondpage)) {
-        if (!empty($certificate->secondpagetext['text'])){
-            $certificate->secondpagetext = $certificate->secondpagetext['text'];
-            $certificate->secondpagetextformat = FORMAT_HTML;
-        } else {
-            $certificate->secondpagetext = null;
-            $certificate->secondpagetextformat = FORMAT_HTML;
-        }
-    
-        if (!empty($images[1])) {
-            $certificate->secondimage = $images[1];
-        } else {
-            $certificate->secondimage = null;
-        }
-    } else {
-        $certificate->secondpagetext = null;
-        $certificate->secondpagetextformat = FORMAT_HTML;
-        $certificate->secondimage = null;
-        $certificate->secondpagex = null;
-        $certificate->secondpagey = null;
-    }
     
     // re-save the record with the replaced URLs in editor fields
     $DB->update_record('customcertificate', $certificate);
@@ -133,28 +109,6 @@ function customcertificate_update_instance($certificate, $mform=null) {
     $certificate->conclucertificatetextformat = FORMAT_HTML;
     $certificate->certificateimage = $images[0];
 
-    //Second Page
-    if (!empty($certificate->enablesecondpage)) {
-        if (!empty($certificate->secondpagetext['text'])){
-            $certificate->secondpagetext = $certificate->secondpagetext['text'];
-            $certificate->secondpagetextformat = FORMAT_HTML;
-        } else {
-            $certificate->secondpagetext = null;
-            $certificate->secondpagetextformat = FORMAT_HTML;
-        }
-
-        if (!empty($images[1])) {
-            $certificate->secondimage = $images[1];
-        } else {
-            $certificate->secondimage = null;
-        }
-    } else {
-        $certificate->secondpagetext = null;
-        $certificate->secondpagetextformat = FORMAT_HTML;
-        $certificate->secondimage = null;
-        $certificate->secondpagex = null;
-        $certificate->secondpagey = null;
-    }
 
     // re-save the record with the replaced URLs in editor fields
 
@@ -546,20 +500,12 @@ function customcertificate_process_form_files ($mform, stdclass $context) {
     require_once(dirname(__FILE__) . '/locallib.php');
     $certimages=array();
     $certimages[0] = $mform->get_new_filename('certificateimage');
-    $certimages[1] = $mform->get_new_filename('secondimage');
 
     $fs = get_file_storage();
     if ($certimages[0] !== false) {
         $fileinfo=customcertificate::get_certificate_image_fileinfo($context->id);
         $fs->delete_area_files($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],$fileinfo['itemid']);
         $mform->save_stored_file('certificateimage', $fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $certimages[0]);
-    }
-
-    if ($certimages[1] !== false) {
-        $fileinfo=customcertificate::get_certificate_secondimage_fileinfo($context->id);
-        $fs = get_file_storage();
-        $fs->delete_area_files($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],$fileinfo['itemid']);
-        $mform->save_stored_file('secondimage', $fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $certimages[1]);
     }
     return $certimages;
 }

@@ -78,12 +78,6 @@ class customcertificate {
     public $requiredtime;
     public $certgrade;
     public $gradefmt;
-    public $enablesecondpage;
-    public $secondpagex;
-    public $secondpagey;
-    public $secondpagetext;
-    public $secondpagetextformat;
-    public $secondimage;
     public $course;
     public $coursemodule;
     public $context;
@@ -140,24 +134,6 @@ class customcertificate {
         );
         return $fileinfo;
     }
-
-    public static function get_certificate_secondimage_fileinfo($context) {
-        if (is_object($context)) {
-            $contextid = $context->id;
-        } else {
-            $contextid = $context;
-        }
-
-        $fileinfo = array(
-                'contextid' => $contextid, // ID of context
-                'component' => self::CERTIFICATE_COMPONENT_NAME, // usually = table name
-                'filearea' => self::CERTIFICATE_IMAGE_FILE_AREA, // usually = table name
-                'itemid' => 2, // usually = ID of row in table
-                'filepath' => '/'           // any path beginning and ending in /
-        );
-        return $fileinfo;
-    }
-
 
     public static function get_certificate_issue_fileinfo($userid, $issueid, $context) {
 
@@ -539,31 +515,6 @@ class customcertificate {
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->conclucertificatetext), 0, 0, 0, true, 'L');
 
         @remove_dir($temp_manager->path);
-
-        if (!empty($this->enablesecondpage)) {
-
-            $pdf->AddPage();
-
-            if (!empty($this->secondimage)) {
-                // Prepare file record object
-                $secondimagefileinfo = self::get_certificate_secondimage_fileinfo($this->context->id);
-                // Get file
-                $secondimagefile = $fs->get_file($secondimagefileinfo['contextid'], $secondimagefileinfo['component'], $secondimagefileinfo['filearea'], $secondimagefileinfo['itemid'], $secondimagefileinfo['filepath'], $this->secondimage);
-
-                // Read contents
-                if ($secondimagefile) {
-                    $temp_manager = $this->move_temp_dir($secondimagefile);
-                } else {
-                    print_error(get_string('filenotfound', 'customcertificate', $this->secondimage));
-                }
-                $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
-                @remove_dir($temp_manager->path);
-            }
-            if (!empty($this->secondpagetext)) {
-                $pdf->SetXY($this->secondpagex, $this->secondpagey);
-                $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->secondpagetext), 0, 0, 0, true, 'C');
-            }
-        }
 
         return $pdf;
     }

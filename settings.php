@@ -25,19 +25,19 @@ if ($ADMIN->fulltree) {
         get_string('size_help', 'customcertificate'), 210, PARAM_INT));
 
     $settings->add(new admin_setting_configtext('customcertificate/certificatetextx', get_string('defaultcertificatetextx', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 10, PARAM_INT));
     $settings->add(new admin_setting_configtext('customcertificate/certificatetexty', get_string('defaultcertificatetexty', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 70, PARAM_INT));
 
     $settings->add(new admin_setting_configtext('customcertificate/introcertificatetextx', get_string('defaultintrocertificatetextx', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 20, PARAM_INT));
     $settings->add(new admin_setting_configtext('customcertificate/introcertificatetexty', get_string('defaultintrocertificatetexty', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 20, PARAM_INT));
 
     $settings->add(new admin_setting_configtext('customcertificate/conclucertificatetextx', get_string('defaultconclucertificatetextx', 'customcertificate'),
         get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
     $settings->add(new admin_setting_configtext('customcertificate/conclucertificatetexty', get_string('defaultconclucertificatetexty', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 100, PARAM_INT));
 
     $settings->add(new admin_setting_configcheckbox('customcertificate/savecert',
         get_string('savecert', 'customcertificate'), get_string('savecert_help', 'customcertificate'), 1));
@@ -48,10 +48,6 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configtext('customcertificate/certlifetime', get_string('certlifetime', 'customcertificate'),
         get_string('certlifetime_help', 'customcertificate'), 60, PARAM_INT));
-
-	//Certificate back page
-    $settings->add(new admin_setting_configcheckbox('customcertificate/enablesecondpage',
-    		get_string('enablesecondpage', 'customcertificate'), get_string('enablesecondpage_help', 'customcertificate'), 0));
     
 }
 
