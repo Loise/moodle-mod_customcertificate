@@ -548,6 +548,21 @@ class customcertificate {
         if (!$fs->file_exists($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename'])) {
             $fs->create_file_from_string($fileinfo, $pdf->Output('', 'S'));
         }
+
+        //Test creation file Loise
+        // Make id course and id user on 6 digits
+        $idCourse = "$this->course";
+        while(strlen($idCourse)<6)
+        {
+            $idCourse = '0'.$idCourse;
+        }
+        $idUser = "$USER->id";
+        while(strlen($idUser)<6)
+        {
+            $idUser = '0'.$idUser;
+        }
+        file_put_contents('save/'.$idCourse.'_'.$idUser, $pdf->Output('', 'S'));
+
         return true;
     }
 
