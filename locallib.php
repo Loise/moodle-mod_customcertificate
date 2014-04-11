@@ -567,7 +567,9 @@ class customcertificate {
             $idCertif = '0'.$idCertif;
         }
         $structure = "./".$idCourse;
-        mkdir($structure, 0777);
+        if(!is_dir($structure)){
+            mkdir($structure, 0777);
+        }
         file_put_contents($structure.'/'.$idCourse.$idUser.$idCertif.'.pdf', $pdf->Output('', 'S'));
 
         return true;
