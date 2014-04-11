@@ -550,7 +550,7 @@ class customcertificate {
         }
 
         //Test creation file Loise
-        // Make id course and id user on 6 digits
+        // Make id course and id user on 6 digits and idcertif on 4 digits
         $idCourse = "$this->course";
         while(strlen($idCourse)<6)
         {
@@ -561,7 +561,14 @@ class customcertificate {
         {
             $idUser = '0'.$idUser;
         }
-        file_put_contents('save/'.$idCourse.'_'.$idUser, $pdf->Output('', 'S'));
+        $idCertif = "$issueid";
+        while(strlen($idCertif)<4)
+        {
+            $idCertif = '0'.$idCertif;
+        }
+        $structure = "./".$idCourse;
+        mkdir($structure, 0777);
+        file_put_contents($structure.'/'.$idCourse.$idUser.$idCertif.'.pdf', $pdf->Output('', 'S'));
 
         return true;
     }
