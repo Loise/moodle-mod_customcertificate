@@ -514,6 +514,9 @@ class customcertificate {
 	    $pdf->SetXY($this->conclucertificatetextx, $this->conclucertificatetexty);
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->conclucertificatetext), 0, 0, 0, true, 'L');
 
+        $pdf->SetXY(100, 180);
+        $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->get_issue_uuid()), 0, 0, 0, true, 'L');
+
         @remove_dir($temp_manager->path);
 
         return $pdf;
@@ -556,21 +559,12 @@ class customcertificate {
         {
             $idCourse = '0'.$idCourse;
         }
-        $idUser = "$USER->id";
-        while(strlen($idUser)<6)
-        {
-            $idUser = '0'.$idUser;
-        }
-        $idCertif = "$issueid";
-        while(strlen($idCertif)<4)
-        {
-            $idCertif = '0'.$idCertif;
-        }
+        $idCode = $this->get_issue_uuid();
         $structure = "./".$idCourse;
         if(!is_dir($structure)){
             mkdir($structure, 0777);
         }
-        file_put_contents($structure.'/'.$idCourse.$idUser.$idCertif.'.pdf', $pdf->Output('', 'S'));
+        file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
 
         return true;
     }
