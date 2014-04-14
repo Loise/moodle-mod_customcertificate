@@ -72,6 +72,7 @@ $string['coursetimereq'] = 'Minutes éxigées dans ce cours';
 $string['emailteachers'] = 'Courriels des professeurs';
 $string['emailothers'] = 'Autres adresses courriel';
 $string['emailfrom'] = 'Adresse de courriel';
+$string['addphoto'] = 'Ajouter une photo au certificat';
 $string['savecert'] = 'Sauvez les certificats';
 $string['delivery'] = 'Emission';
 //Delivery options
@@ -207,6 +208,7 @@ $string['coursetimereq_help'] = 'Entrez ici le minimum de temps, en minutes, d\'
 $string['emailteachers_help'] = 'Si elle est activée, les enseignants sont alertés avec un e-mail chaque fois que les étudiants reçoivent un certificat.';
 $string['emailothers_help'] = 'Entrez les adresses e-mail ici, séparés par une virgule, de ceux qui devraient être alerté par e-mail chaque fois que les étudiants reçoivent un certificat.';
 $string['emailfrom_help'] = 'Adresse secondaire de courriel';
+$string['addphoto_help'] = 'Si vous choisissez cette option, les étudiants sont forcés d\'uploader leur photo pour récupérer leur certificat.';
 $string['savecert_help'] = 'Si vous choisissez cette option, une copie du fichier pdf du certificat de chaque utilisateur est enregistré dans le dossier moddata des fichiers de cours pour ce certificat. Un lien vers le certificat a été sauvegardé de chaque utilisateur sera affiché dans le rapport de certification.';
 $string['delivery_help'] = 'Choisissez ici la façon dont vous souhaitez que vos élèves obtienne leur certificat. Ouvrir dans une nouvelle fenêtre: Ouvre le certificat dans une nouvelle fenêtre du navigateur. Force le téléchargement: Ouvre la fenêtre de téléchargement du fichier du navigateur. Email: Cette option envoie le certificat à l\'étudiant en pièce jointe. Après que l\'utilisateur ai reçu son certificat, s\'il clique sur ​​le lien du certificat depuis la page d\'accueil du cours, il verra le jour il a reçu son certificat et sera en mesure d\'examiner le certificat reçu.';
 

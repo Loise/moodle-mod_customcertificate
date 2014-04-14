@@ -46,7 +46,7 @@ class backup_customcertificate_activity_structure_step extends backup_activity_s
                 'certificatetextformat', 'certificatetextx', 'certificatetexty','introcertificatetext',
                 'introcertificatetextformat', 'introcertificatetextx', 'introcertificatetexty', 'conclucertificatetext',
                 'conclucertificatetextformat', 'conclucertificatetextx', 'conclucertificatetexty','certdate', 'certdatefmt',
-                'certgrade', 'gradefmt', 'emailfrom', 'emailothers', 'emailteachers', 'savecert', 'reportcert',
+                'certgrade', 'gradefmt', 'emailfrom', 'emailothers', 'emailteachers', 'addphoto', 'savecert', 'reportcert',
                 'delivery', 'requiredtime', 'coursehours', 'outcome', 'coursename', 'timemodified'));
 
 

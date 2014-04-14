@@ -39,6 +39,9 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('customcertificate/conclucertificatetexty', get_string('defaultconclucertificatetexty', 'customcertificate'),
         get_string('textposition_help', 'customcertificate'), 100, PARAM_INT));
 
+    $settings->add(new admin_setting_configcheckbox('customcertificate/addphoto',
+        get_string('addphoto', 'customcertificate'), get_string('addphoto_help', 'customcertificate'), 1));
+
     $settings->add(new admin_setting_configcheckbox('customcertificate/savecert',
         get_string('savecert', 'customcertificate'), get_string('savecert_help', 'customcertificate'), 1));
 

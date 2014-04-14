@@ -66,6 +66,7 @@ $string['coursetimereq'] = 'Minutos mínimos de participação no curso';
 $string['emailteachers'] = 'Enviar email para os Professores';
 $string['emailothers'] = 'Enviar email para outros';
 $string['emailfrom'] = 'Nome alternativo do remetendo do email';
+$string['addphoto'] = 'Agregar un certificado foto';
 $string['savecert'] = 'Salvar os certificados';
 $string['delivery'] = 'Envio';
 //Delivery options
@@ -134,6 +135,7 @@ $string['coursetimereq_help'] = 'Coloque o tempo minimo de participação (em mi
 $string['emailteachers_help'] = 'Quando habilitado, os professores recebem os emails toda vez que um aluno emitir um certificado.';
 $string['emailothers_help'] = 'Digite os endereços de emails que vão receber o alerta de emissão de certificado.';
 $string['emailfrom_help'] = 'Nome a ser usado como remetente dos email enviados';
+$string['addphoto_help'] = 'Si elige esta opción, los estudiantes se ven obligados a subir su foto para obtener su certificado.';
 $string['savecert_help'] = 'Quando habilitado, uma cópia do certificado e salva nos arquivos do curso, dentro do sistema moodle um link para o certificado salvo aparcerá no relatório de certificados.';
 $string['delivery_help'] = 'Escolha como o certificado deve ser entregue aos alunos:
 Visualizar em uma nova janela: Abre uma nova janela no navegador do aluno contendo o certificado.

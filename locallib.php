@@ -72,6 +72,7 @@ class customcertificate {
     public $emailfrom;
     public $emailothers;
     public $emailteachers;
+    public $addphoto;
     public $savecert;
     public $reportcert;
     public $delivery;

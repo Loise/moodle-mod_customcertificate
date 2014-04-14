@@ -72,6 +72,7 @@ $string['coursetimereq'] = 'Required minutes in course';
 $string['emailteachers'] = 'Email Teachers';
 $string['emailothers'] = 'Email Others';
 $string['emailfrom'] = 'Email From name';
+$string['addphoto'] = 'Add photo to certificate';
 $string['savecert'] = 'Save Certificates';
 $string['delivery'] = 'Delivery';
 //Delivery options
@@ -139,6 +140,7 @@ $string['coursetimereq_help'] = 'Enter here the minimum amount of time, in minut
 $string['emailteachers_help'] = 'If enabled, then teachers are alerted with an email whenever students receive a certificate.';
 $string['emailothers_help'] = 'Enter the email addresses here, separated by a comma, of those who should be alerted with an email whenever students receive a certificate.';
 $string['emailfrom_help'] = 'Alternate email form name';
+$string['addphoto_help'] = 'If you choose this option, students are forced to upload their photo to get their certificate.';
 $string['savecert_help'] = 'If you choose this option, then a copy of each user\'s certificate pdf file is saved in the course files moddata folder for that certificate. A link to each user\'s saved certificate will be displayed in the certificate report.';
 $string['delivery_help'] = 'Choose here how you would like your students to get their certificate.
 Open in Browser: Opens the certificate in a new browser window.
