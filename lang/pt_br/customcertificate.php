@@ -36,6 +36,7 @@ $string['nocertificatesissued'] = 'Nenhum certificado emitido';
 
 //Form
 $string['certificatename'] = 'Nome do certificado';
+$string['userphoto'] = 'Arquivo de Imagem do user do Certificado';
 $string['certificateimage'] = 'Arquivo de Imagem do Certificado';
 $string['certificatetext'] = 'Texto do Certificado';
 $string['certificatetextx'] = 'Posição Horizontal do texto do certificado';
@@ -117,6 +118,7 @@ $string['size'] = 'Tamanho do Certificado';
 $string['size_help'] = 'Esse é o tamanho, Largura e Altura (em milímetros) do certificado, o padrão é A4 paisagem';
 $string['coursehours_help'] = 'Carga horário do curso';
 $string['coursename_help'] = 'Nome alternativo do curso que vai ser impresso no certificado';
+$string['userphoto_help'] = 'Esta figura será usada no certificado como la imagen de un usuario';
 $string['certificateimage_help'] = 'Esta figura será usada no certificado';
 
 $string['printoutcome_help'] = 'Você pode escolher qualquer resultado (outcome) definido neste curso. Será impresso o nome do resultado e o resultado recebido  pelo usuário. Um exemplo poderia ser: Resultado: Proficiente.';

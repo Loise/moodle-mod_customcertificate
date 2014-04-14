@@ -42,7 +42,7 @@ class backup_customcertificate_activity_structure_step extends backup_activity_s
 
        
         $certificate = new backup_nested_element('customcertificate', array('id'), array(
-                'name', 'intro', 'introformat', 'width', 'height', 'certificateimage', 'certificatetext',
+                'name', 'intro', 'introformat', 'width', 'height', 'userphoto', 'certificateimage', 'certificatetext',
                 'certificatetextformat', 'certificatetextx', 'certificatetexty','introcertificatetext',
                 'introcertificatetextformat', 'introcertificatetextx', 'introcertificatetexty', 'conclucertificatetext',
                 'conclucertificatetextformat', 'conclucertificatetextx', 'conclucertificatetexty','certdate', 'certdatefmt',

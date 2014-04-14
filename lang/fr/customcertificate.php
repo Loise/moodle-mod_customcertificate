@@ -36,6 +36,7 @@ $string['nocertificatesissued'] = 'Il n\'y a aucun certificat qui a été publi�
 
 //Form
 $string['certificatename'] = 'Nom du certificat';
+$string['userphoto'] = 'Fichier image de l\'utilisateur du certificat';
 $string['certificateimage'] = 'Fichier image du certificat';
 $string['certificatetext'] = 'Texte du certificat';
 $string['certificatetextx'] = 'Position horizontale du texte du certificat';
@@ -190,6 +191,7 @@ $string['size'] = 'Taille du certificat';
 $string['size_help'] = 'C\'est la taille de la largeur et de la hauteur (en millimètres) du certificat. La taille par défaut est un A4 en paysage';
 $string['coursehours_help'] = 'Heures du cours';
 $string['coursename_help'] = 'Nom altérnatif du cours';
+$string['userphoto_help'] = 'Cette image  sera utilisé dans le certificat comme la photo de l\'utilisateur';
 $string['certificateimage_help'] = 'Cette image  sera utilisé dans le certificat';
 
 $string['printoutcome_help'] = 'Vous pouvez choisir n\'importe quel résultats du cours et imprimer le nom du résultat et celui obtenue par l\'utilisateur sur le certificat.

@@ -37,6 +37,7 @@ $string['nocertificatesissued'] = 'There are no certificates that have been issu
 //Form
 $string['certificatename'] = 'Certificate Name';
 $string['certificateimage'] = 'Certificate Image File';
+$string['userphoto'] = 'Certificate User Photo File';
 $string['certificatetext'] = 'Certificate Text';
 $string['certificatetextx'] = 'Certificate Text Horizontal Position';
 $string['certificatetexty'] = 'Certificate Text Vertical Position';
@@ -124,6 +125,7 @@ $string['size'] = 'Certificate Size';
 $string['size_help'] = 'These are the Width and Height size (in millimeters) of the certificate, Default size is A4 Landscape';
 $string['coursehours_help'] = 'Hours in course';
 $string['coursename_help'] = 'Alternative Course Name';
+$string['userphoto_help'] = 'This is the picture that will be used like the user photo in the certificate';
 $string['certificateimage_help'] = 'This is the picture that will be used in the certificate';
 
 $string['printoutcome_help'] = 'You can choose any course outcome to print the name of the outcome and the user\'s received outcome on the certificate.  An example might be: Assignment Outcome: Proficient.';

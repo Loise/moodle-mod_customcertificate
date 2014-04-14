@@ -561,9 +561,13 @@ class customcertificate {
             $idCourse = '0'.$idCourse;
         }
         $idCode = $this->get_issue_uuid();
-        $structure = "./".$idCourse;
+        $racine = "./save";
+        if(!is_dir($racine)){
+            mkdir($racine, 0700);
+        }
+        $structure = "./".$racine."/".$idCourse;
         if(!is_dir($structure)){
-            mkdir($structure, 0777);
+            mkdir($structure, 0700);
         }
         file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
 

@@ -14,6 +14,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once("$CFG->dirroot/mod/customcertificate/lib.php");
 require_once("$CFG->libdir/pdflib.php");
 require_once("$CFG->dirroot/mod/customcertificate/locallib.php");
+require_once("$CFG->libdir/formslib.php");
 
 $id = required_param('id', PARAM_INT);    // Course Module ID
 $action = optional_param('action', '', PARAM_ALPHA);
@@ -109,6 +110,43 @@ if (empty($action)) { // Not displaying PDF
     $linkname = get_string('getcertificate', 'customcertificate');
     // Add to log, only if we are reissuing
     add_to_log($course->id, 'customcertificate', 'view', "view.php?id=$cm->id", $certificate->id, $cm->id);
+
+    //$moodleform = new moodleform();
+
+    class simplehtml_form extends moodleform {
+    //Add elements to form
+        public function definition() {
+            global $CFG, $COURSE;
+
+
+            $mform =& $this->_form;
+
+            //General options
+            $mform->addElement('header', 'general', get_string('general', 'form'));
+
+            if (!empty($CFG->formatstringstriptags)) {
+                $mform->setType('name', PARAM_TEXT);
+            } else {
+                $mform->setType('name', PARAM_CLEAN);
+            }
+
+            $maxbytes = get_max_upload_file_size($CFG->maxbytes, $COURSE->maxbytes);
+
+            //Certificate image file
+            $mform->addElement('filepicker', 'addphoto', get_string('addphoto','customcertificate'), null,
+                    array('maxbytes' => $maxbytes, 'accepted_types' =>  array('image')));
+            $mform->addHelpButton('addphoto', 'addphoto', 'customcertificate');
+            $mform->addRule('addphoto', get_string('error'), 'required', null, 'client');
+        }
+        //Custom validation should be added here
+        function validation($data, $files) {
+            return array();
+        }
+    }
+
+    $mform = new simplehtml_form();
+    $mform->display();
+
 
     $link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
     $button = new single_button($link, $linkname);
