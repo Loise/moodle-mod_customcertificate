@@ -557,51 +557,20 @@ function customcertificate_get_editor_options(stdclass $context) {
 function customcertificate_get_mods (){
     global $COURSE, $CFG, $DB;
 
-    $strtopic = get_string("topic");
-    $strweek = get_string("week");
-    $strsection = get_string("section");
+    $grademodules = array();
+    $items = grade_item::fetch_all(array('courseid'=>$COURSE->id));
+    $items = $items ? $items : array();
 
-    // Collect modules data
-    get_all_mods($COURSE->id, $mods, $modnames, $modnamesplural, $modnamesused);
-
-    $modules = array();
-    $sections = get_all_sections($COURSE->id); // Sort everything the same as the course
-    for ($i = 0; $i <= $COURSE->numsections; $i++) {
-        // should always be true
-        if (isset($sections[$i])) {
-            $section = $sections[$i];
-            if ($section->sequence) {
-                switch ($COURSE->format) {
-                    case "topics":
-                        $sectionlabel = $strtopic;
-                        break;
-                    case "weeks":
-                        $sectionlabel = $strweek;
-                        break;
-                    default:
-                        $sectionlabel = $strsection;
-                }
-
-                $sectionmods = explode(",", $section->sequence);
-                foreach ($sectionmods as $sectionmod) {
-                    if (empty($mods[$sectionmod])) {
-                        continue;
-                    }
-                    $mod = $mods[$sectionmod];
-                    $mod->courseid = $COURSE->id;
-                    $instance = $DB->get_record($mod->modname, array('id' => $mod->instance));
-                    if ($grade_items = grade_get_grade_items_for_activity($mod)) {
-                        $mod_item = grade_get_grades($COURSE->id, 'mod', $mod->modname, $mod->instance);
-                        $item = reset($mod_item->items);
-                        if (isset($item->grademax)){
-                            $modules[$mod->id] = $sectionlabel . ' ' . $section->section . ' : ' . $instance->name;
-                        }
-                    }
-                }
-            }
+    foreach($items as $id=>$item) {
+        // Do not include grades for course itens
+        if ($item->itemtype != 'mod') {
+            continue;
         }
+        $cm = get_coursemodule_from_instance($item->itemmodule, $item->iteminstance);
+        $grademodules[$cm->id] = $item->get_name();
     }
-    return $modules;
+    asort($grademodules);
+    return $grademodules;
 }
 
 /**

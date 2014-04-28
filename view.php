@@ -133,28 +133,54 @@ if (empty($action)) { // Not displaying PDF
             $maxbytes = get_max_upload_file_size($CFG->maxbytes, $COURSE->maxbytes);
 
             //Certificate image file
-            $mform->addElement('filepicker', 'addphoto', get_string('addphoto','customcertificate'), null,
+            $mform->addElement('filepicker', 'userphoto', get_string('userphoto','customcertificate'), null,
                     array('maxbytes' => $maxbytes, 'accepted_types' =>  array('image')));
-            $mform->addHelpButton('addphoto', 'addphoto', 'customcertificate');
-            $mform->addRule('addphoto', get_string('error'), 'required', null, 'client');
+            $mform->addHelpButton('userphoto', 'userphoto', 'customcertificate');
+            $mform->addRule('userphoto', get_string('error'), 'required', null, 'client');
         }
+
+        /**
+         * Prepares the form before data are set
+         *
+         * Additional wysiwyg editor are prepared here, the introeditor is prepared automatically by core.
+         * Grade items are set here because the core modedit supports single grade item only.
+         *
+         * @param array $data to be set
+         * @return void
+         */
+        public function data_preprocessing(&$data) {
+            global $CFG;
+            require_once(dirname(__FILE__) . '/locallib.php');
+            if ($this->current->instance) {
+                // editing an existing certificate - let us prepare the added editor elements (intro done automatically), and files
+                $imagedraftitemid = file_get_submitted_draft_itemid('userphoto');
+                $imagefileinfo = customcertificate::get_certificate_image_fileinfo($this->context);
+                file_prepare_draft_area($imagedraftitemid, $imagefileinfo['contextid'], $imagefileinfo['component'], $imagefileinfo['filearea'], $imagefileinfo['itemid']);
+                $data['userphoto'] = $imagedraftitemid;
+            }
+        }
+
         //Custom validation should be added here
         function validation($data, $files) {
             return array();
         }
     }
 
-    $mform = new simplehtml_form();
-    $mform->display();
+    if($certificate->addphoto == 1)
+    {
+    	$mform = new simplehtml_form();
+    	$mform->display();
+    }
+    else
+    {
+    	$link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
+	    $button = new single_button($link, $linkname);
+	    $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
 
-
-    $link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
-    $button = new single_button($link, $linkname);
-    $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
-
-    echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
-    echo $OUTPUT->footer($course);
-    exit;
+	    echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
+	    echo $OUTPUT->footer($course);
+	    exit;
+    }
 } else { // Output to pdf
     $customcertificate->output_pdf($certrecord);
 }
