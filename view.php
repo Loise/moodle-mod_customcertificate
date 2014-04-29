@@ -130,13 +130,13 @@ if (empty($action)) { // Not displaying PDF
                 $mform->setType('name', PARAM_CLEAN);
             }
 
-            $maxbytes = get_max_upload_file_size($CFG->maxbytes, $COURSE->maxbytes);
-
             //Certificate image file
             $mform->addElement('filepicker', 'userphoto', get_string('userphoto','customcertificate'), null,
-                    array('maxbytes' => $maxbytes, 'accepted_types' =>  array('image')));
+                array('maxbytes' => 100, 'accepted_types' =>  array('image')));
             $mform->addHelpButton('userphoto', 'userphoto', 'customcertificate');
             $mform->addRule('userphoto', get_string('error'), 'required', null, 'client');
+
+            //$this->add_action_buttons();
         }
 
         /**
@@ -170,6 +170,12 @@ if (empty($action)) { // Not displaying PDF
     {
     	$mform = new simplehtml_form();
     	$mform->display();
+        $link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
+        $button = new single_button($link, $linkname);
+        $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
+
+        echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
+        echo $OUTPUT->footer($course);
     }
     else
     {
