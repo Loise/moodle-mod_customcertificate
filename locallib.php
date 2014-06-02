@@ -515,8 +515,12 @@ class customcertificate {
 	    $pdf->SetXY($this->conclucertificatetextx, $this->conclucertificatetexty);
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->conclucertificatetext), 0, 0, 0, true, 'L');
 
-        $pdf->SetXY(100, 180);
+        $pdf->SetXY(110, 195);
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->get_issue_uuid()), 0, 0, 0, true, 'L');
+
+        $pdf->SetXY(100, 205);
+        $pdf->SetFontSize(8);
+        $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $CFG->wwwroot.'/mod/customcertificate/verify.php'), 0, 0, 0, true, 'L');
 
         @remove_dir($temp_manager->path);
 

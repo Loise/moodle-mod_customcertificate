@@ -14,9 +14,8 @@
                 <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated" NEXT="width"/>
                 <FIELD NAME="width" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="297" SEQUENCE="false" PREVIOUS="timemodified" NEXT="height"/>
                 <FIELD NAME="height" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="210" SEQUENCE="false" PREVIOUS="width" NEXT="certificateimage"/>
-                <FIELD NAME="certificateimage" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="height" NEXT="userphoto"/>
-                <FIELD NAME="userphoto" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="certificateimage" NEXT="certificatetext"/>
-                <FIELD NAME="certificatetext" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="userphoto" NEXT="certificatetextformat"/>
+                <FIELD NAME="certificateimage" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="height" NEXT="certificatetext"/>
+                <FIELD NAME="certificatetext" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="certificateimage" NEXT="certificatetextformat"/>
                 <FIELD NAME="certificatetextformat" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="certificatetext" NEXT="certificatetextx"/>
                 <FIELD NAME="certificatetextx" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="certificatetextformat" NEXT="certificatetexty"/>
                 <FIELD NAME="certificatetexty" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="50" SEQUENCE="false" PREVIOUS="certificatetextx" NEXT="introcertificatetext"/>
@@ -55,8 +54,10 @@
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="certificateid"/>
                 <FIELD NAME="certificateid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
                 <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="certificateid" NEXT="username"/>
-                <FIELD NAME="username" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="userid" NEXT="coursename"/>
-                <FIELD NAME="coursename" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="username" NEXT="code"/>
+                <FIELD NAME="username" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="userid" NEXT="userphoto"/>
+                 <FIELD NAME="userphoto" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="username" NEXT="validationphoto"/>
+                 <FIELD NAME="validationphoto" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="userphoto" NEXT="coursename"/>
+                <FIELD NAME="coursename" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="validationphoto" NEXT="code"/>
                 <FIELD NAME="code" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="coursename" NEXT="timecreated"/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="code" NEXT="timedeleted"/>
                 <FIELD NAME="timedeleted" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timecreated"/>

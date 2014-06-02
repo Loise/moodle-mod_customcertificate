@@ -166,13 +166,18 @@ if (empty($action)) { // Not displaying PDF
         }
     }
 
+    $issuecertificates = $DB->get_records('customcertificate_issues', array('certificateid' => $certificate->id));
+
+
     if($certificate->addphoto == 1)
     {
     	$mform = new simplehtml_form();
     	$mform->display();
-        $link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
+        $link = new moodle_url('/mod/customcertificate/pending.php', array ('id' => $cm->id, 'action' => 'get'));
         $button = new single_button($link, $linkname);
         $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
+
+        echo html_writer::tag('p', $issuecertificates->validationphoto, array('style' => 'text-align:center'));
 
         echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
         echo $OUTPUT->footer($course);
