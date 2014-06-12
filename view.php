@@ -119,7 +119,7 @@ if (empty($action)) { // Not displaying PDF
 
     if($certificate->addphoto == 1) //&& $issuecertificates->validationphoto == 0)
     {
-        redirect($CFG->wwwroot.'/mod/customcertificate/addphoto.php'); 
+        redirect($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id=' . $certificate->id); 
     }
     else
     {

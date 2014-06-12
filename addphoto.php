@@ -10,22 +10,19 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once('verify_form.php');
+require_once('addphoto_form.php');
 
-//optional_param('id', $USER->id, PARAM_INT);
-$code = optional_param('code', null,PARAM_ALPHANUMEXT); // Issed Code
+optional_param('id', $USER->id, PARAM_INT);
+//$code = optional_param('code', null,PARAM_ALPHANUMEXT); // Issed Code
 
 $context = context_system::instance();
-$PAGE->set_url('/mod/customcertificate/addphoto.php', array('code' => $code));
+$PAGE->set_url('/mod/customcertificate/addphoto.php', array('id' => $id));
 $PAGE->set_context($context);
-$PAGE->set_title(format_string($certificate->name));
-$PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_pagelayout('base');
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
-$mform = new simplehtml_form();
+$mform = new addphoto_form();
 $mform->display();
-echo $OUTPUT->footer($course);
 
 if (!$mform->get_data()) {
     echo html_writer::tag('p', "error : no data", array('style' => 'text-align:center'));

@@ -6,7 +6,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot.'/lib/formslib.php');
 
 
-class verify_form extends moodleform {
+class addphoto_form extends moodleform {
     public function definition() {
         global $CFG, $COURSE;
 
