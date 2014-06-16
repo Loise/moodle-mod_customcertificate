@@ -484,7 +484,7 @@ class customcertificate {
         $imagefileinfo = self::get_certificate_image_fileinfo($this->context->id);
         // Get file
         $imagefile = $fs->get_file($imagefileinfo['contextid'], $imagefileinfo['component'], $imagefileinfo['filearea'], $imagefileinfo['itemid'], $imagefileinfo['filepath'], $this->certificateimage);
-
+        
         // Read contents
         if ($imagefile) {
             $temp_manager = $this->move_temp_dir($imagefile);
