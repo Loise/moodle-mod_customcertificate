@@ -70,12 +70,18 @@ if ($certificate->requiredtime && !has_capability('mod/certificate:manage', $con
         $a = new stdClass;
         $a->requiredtime = $certificate->requiredtime;
         notice(get_string('requiredtimenotmet', 'customcertificate', $a), "$CFG->wwwroot/course/view.php?id=$course->id");
+
         die;
     }
 }
 
 // Create new certificate record, or return existing record
 $certrecord = $customcertificate->get_issue($USER);
+
+if($certificate->addphoto == 1 && $certrecord->validationphoto == 0)
+{
+    redirect($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id=' . $certificate->id); 
+}
 
 
 if (empty($action)) { // Not displaying PDF
@@ -117,20 +123,13 @@ if (empty($action)) { // Not displaying PDF
     //$issuecertificates = $DB->get_records('customcertificate_issues', array('certificateid' => $certificate->id, 'timedeleted' => null));
 
 
-    if($certificate->addphoto == 1) //&& $issuecertificates->validationphoto == 0)
-    {
-        redirect($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id=' . $certificate->id); 
-    }
-    else
-    {
-      $link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
-	    $button = new single_button($link, $linkname);
-	    $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
+    $link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
+    $button = new single_button($link, $linkname);
+    $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
 
-	    echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
-	    echo $OUTPUT->footer($course);
-	    exit;
-    }
+	echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
+	echo $OUTPUT->footer($course);
+	exit;
 } else { // Output to pdf
     $customcertificate->output_pdf($certrecord);
 }

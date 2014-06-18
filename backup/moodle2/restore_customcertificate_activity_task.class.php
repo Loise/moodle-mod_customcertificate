@@ -84,7 +84,7 @@ class restore_customcertificate_activity_task extends restore_activity_task {
 
         $rules[] = new restore_log_rule('customcertificate', 'add', 'view.php?id={course_module}', '{customcertificate}');
         $rules[] = new restore_log_rule('customcertificate', 'update', 'view.php?id={course_module}', '{customcertificate}');
-        $rules[] = new restore_log_rule('customcertificate', 'view', 'addphoto.php?id={course_module}', '{customcertificate}');
+        $rules[] = new restore_log_rule('customcertificate', 'view', 'view.php?id={course_module}', '{customcertificate}');
         $rules[] = new restore_log_rule('customcertificate', 'received', 'report.php?a={customcertificate}', '{customcertificate}');
         $rules[] = new restore_log_rule('customcertificate', 'view report', 'report.php?id={customcertificate}', '{customcertificate}');
         $rules[] = new restore_log_rule('customcertificate', 'verifyt', 'verify.php?code={customcertificate_isse}', '{customcertificate}');

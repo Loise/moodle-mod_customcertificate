@@ -180,6 +180,7 @@ class customcertificate {
             $certissue->coursename = format_string($this->coursename, true);
             $certissue->timecreated = time();
             $certissue->code = $this->get_issue_uuid();
+            $certissue->validationphoto = 0;
 
             if (!has_capability('mod/customcertificate:manage', $this->context)) {
                 $certissue->id = $DB->insert_record('customcertificate_issues', $certissue);
