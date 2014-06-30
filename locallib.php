@@ -73,6 +73,7 @@ class customcertificate {
     public $emailothers;
     public $emailteachers;
     public $addphoto;
+    public $userphoto;
     public $savecert;
     public $reportcert;
     public $delivery;
@@ -485,13 +486,22 @@ class customcertificate {
         $imagefileinfo = self::get_certificate_image_fileinfo($this->context->id);
         // Get file
         $imagefile = $fs->get_file($imagefileinfo['contextid'], $imagefileinfo['component'], $imagefileinfo['filearea'], $imagefileinfo['itemid'], $imagefileinfo['filepath'], $this->certificateimage);
-        
+        if($this->userphoto != null)
+        {
+            $imagefileuser = $fs->get_file($imagefileinfo['contextid'], $imagefileinfo['component'], $imagefileinfo['filearea'], $imagefileinfo['itemid'], $imagefileinfo['filepath'], $this->userphoto);
+        }
+
         // Read contents
         if ($imagefile) {
             $temp_manager = $this->move_temp_dir($imagefile);
         } else {
             print_error(get_string('filenotfound', 'customcertificate', $this->certificateimage));
         }
+
+        if (isset($imagefileuser) && $imagefileuser){
+            $temp_manager2 = $this->move_temp_dir($imagefileuser);
+        }
+
 
         $pdf = new TCPDF($this->orientation, 'mm', array($this->width, $this->height), true, 'UTF-8', true, false);
         $pdf->SetTitle($this->name);
@@ -506,7 +516,11 @@ class customcertificate {
         $pdf->AddPage();
 
         $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
-	
+        if(isset($temp_manager2))
+        {
+            $pdf->Image($temp_manager2->absolutefilepath, 0, 0, $this->width/2, $this->height/2);
+        }
+
 	    $pdf->SetXY($this->introcertificatetextx, $this->introcertificatetexty);
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->introcertificatetext), 0, 0, 0, true, 'L');
 

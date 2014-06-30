@@ -35,5 +35,6 @@ if (!$mform->get_data()) {
     $fileinfo=customcertificate::get_certificate_image_fileinfo($context->id);
     $fs->delete_area_files($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],$fileinfo['itemid']);
     $mform->save_stored_file('userphoto', $fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $mform->get_new_filename('userphoto'));
+    redirect($CFG->wwwroot.'/mod/customcertificate/pending.php');
 }
 echo $OUTPUT->footer();
