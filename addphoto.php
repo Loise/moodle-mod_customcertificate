@@ -13,7 +13,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once('addphoto_form.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
-$id = optional_param('id', $USER->id, PARAM_INT);
+$id = required_param('id', PARAM_INT);
 //$code = optional_param('code', null,PARAM_ALPHANUMEXT); // Issed Code
 
 $context = context_system::instance();
@@ -22,11 +22,12 @@ $PAGE->set_context($context);
 $PAGE->set_pagelayout('base');
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
-$mform = new addphoto_form();
+$mform = new addphoto_form($CFG->wwwroot.'/mod/customcertificate/pending.php?id='. $id);
 $mform->display();
 
 if (!$mform->get_data()) {
     echo html_writer::tag('p', "error : no data", array('style' => 'text-align:center'));
+    add_to_log($context->instanceid, 'customcertificate', 'verify', "addphoto.php?id=$id");
     $mform->set_data(array('id'=>$id));
 } else {
     echo html_writer::tag('p', "data receive", array('style' => 'text-align:center'));
@@ -35,6 +36,7 @@ if (!$mform->get_data()) {
     $fileinfo=customcertificate::get_certificate_image_fileinfo($context->id);
     $fs->delete_area_files($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],$fileinfo['itemid']);
     $mform->save_stored_file('userphoto', $fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $mform->get_new_filename('userphoto'));
-    redirect($CFG->wwwroot.'/mod/customcertificate/pending.php');
+    //redirect($CFG->wwwroot.'/mod/customcertificate/pending.php?id=' . $id); 
+
 }
 echo $OUTPUT->footer();
