@@ -53,7 +53,10 @@ class addphoto_form extends moodleform {
 
     //Custom validation should be added here
     function validation($data, $files) {
-        return array();
+        $errors = parent::validation($data, $files);
+        return $errors;
     }
+
+
 
 }
