@@ -42,11 +42,11 @@ class backup_customcertificate_activity_structure_step extends backup_activity_s
 
        
         $certificate = new backup_nested_element('customcertificate', array('id'), array(
-                'name', 'intro', 'introformat', 'width', 'height', 'userphoto', 'certificateimage', 'certificatetext',
+                'name', 'intro', 'introformat', 'width', 'height', 'certificateimage', 'certificatetext',
                 'certificatetextformat', 'certificatetextx', 'certificatetexty','introcertificatetext',
                 'introcertificatetextformat', 'introcertificatetextx', 'introcertificatetexty', 'conclucertificatetext',
                 'conclucertificatetextformat', 'conclucertificatetextx', 'conclucertificatetexty','certdate', 'certdatefmt',
-                'certgrade', 'gradefmt', 'emailfrom', 'emailothers', 'emailteachers', 'addphoto', 'savecert', 'reportcert',
+                'certgrade', 'gradefmt', 'emailfrom', 'emailothers', 'emailteachers', 'savecert', 'reportcert',
                 'delivery', 'requiredtime', 'coursehours', 'outcome', 'coursename', 'timemodified'));
 
 
@@ -54,7 +54,7 @@ class backup_customcertificate_activity_structure_step extends backup_activity_s
         $issues = new backup_nested_element('issues');
 
         $issue = new backup_nested_element('issue', array('id'), array(
-                'certificateid', 'userid','username','coursename', 'timecreated','timedeleted', 'code'));
+                'certificateid', 'userid','username','userphoto', 'validationphoto', 'coursename', 'timecreated','timedeleted', 'code'));
 
         // Build the tree
         $certificate->add_child($issues);

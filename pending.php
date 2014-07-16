@@ -10,10 +10,9 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once('addphoto_form.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
-$id = optional_param('id', $USER->id, PARAM_INT);
+$id = required_param('id', PARAM_INT);
 
 $context = context_system::instance();
 $PAGE->set_url('/mod/customcertificate/pending.php', array('id' => $id));
@@ -33,6 +32,5 @@ $DB->update_record('customcertificate', $certificate);
 
 //Send event
 customcertificate_send_event($certificate);
-
 
 echo $OUTPUT->footer();

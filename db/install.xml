@@ -49,18 +49,34 @@
         </TABLE>
                 
         <TABLE NAME="customcertificate_issues" COMMENT="Issues of customcertificate module"
-               PREVIOUS="customcertificate">
+               PREVIOUS="customcertificate" NEXT="customcertificate_userphoto">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="certificateid"/>
                 <FIELD NAME="certificateid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
                 <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="certificateid" NEXT="username"/>
-                <FIELD NAME="username" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="userid" NEXT="userphoto"/>
-                 <FIELD NAME="userphoto" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="username" NEXT="validationphoto"/>
-                 <FIELD NAME="validationphoto" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="userphoto" NEXT="coursename"/>
-                <FIELD NAME="coursename" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="validationphoto" NEXT="code"/>
+                <FIELD NAME="username" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="userid" NEXT="coursename"/>
+                <FIELD NAME="coursename" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="username" NEXT="code"/>
                 <FIELD NAME="code" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" PREVIOUS="coursename" NEXT="timecreated"/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="code" NEXT="timedeleted"/>
                 <FIELD NAME="timedeleted" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timecreated"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="customcertificate_userphoto" COMMENT="User photo of issues of customcertificate module"
+               PREVIOUS="customcertificate_issues">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="certificateid"/>
+                 <FIELD NAME="certificateid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="certificateid" NEXT="userphoto"/>
+                 <FIELD NAME="userphoto" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="code" NEXT="userid"/>
+                 <FIELD NAME="validationphoto" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="userphoto" NEXT="contextid"/>
+                 <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="validationphoto" NEXT="component"/>
+                  <FIELD NAME="component" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="contextid" NEXT="filearea"/>
+                  <FIELD NAME="filearea" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="component" NEXT="itemid"/>
+                  <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="filearea" NEXT="filepath"/>
+                  <FIELD NAME="filepath" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="itemid"/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />

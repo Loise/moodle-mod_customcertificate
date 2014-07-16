@@ -68,7 +68,6 @@ function customcertificate_add_instance(stdclass $certificate, $mform=null) {
         $images = customcertificate_process_form_files($mform, $context);
     }
     $certificate->certificateimage = $images[0];
-    $certificate->userphoto = null;
     
     // re-save the record with the replaced URLs in editor fields
     $DB->update_record('customcertificate', $certificate);
@@ -109,7 +108,6 @@ function customcertificate_update_instance($certificate, $mform=null) {
     $certificate->conclucertificatetext = $certificate->conclucertificatetext['text'];
     $certificate->conclucertificatetextformat = FORMAT_HTML;
     $certificate->certificateimage = $images[0];
-    // $certificate->userphoto = null; ??? comment gerer dans l'update
 
     // re-save the record with the replaced URLs in editor fields
 

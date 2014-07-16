@@ -77,10 +77,13 @@ if ($certificate->requiredtime && !has_capability('mod/certificate:manage', $con
 
 // Create new certificate record, or return existing record
 $certrecord = $customcertificate->get_issue($USER);
+$userphoto = $customcertificate->get_user_photo($USER);
+//$userphoto = $DB->get_record('customcertificate_userphoto', array('code' => $certrecord->code));
 
-if($certificate->addphoto == 1 && $certrecord->validationphoto == 0)
+if($certificate->addphoto == 1 && $userphoto->validationphoto == 0)
 {
-    redirect($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id=' . $certificate->id); 
+    //echo html_writer::tag('p', "validationphoto : ".$certrecord->validationphoto." + userphoto : ".$certrecord->userphoto, array('style' => 'text-align:center'));
+    redirect($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id=' . $certificate->id.'&code=' . $certrecord->code); 
 }
 
 

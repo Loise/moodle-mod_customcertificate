@@ -181,12 +181,14 @@ class customcertificate {
             $certissue->coursename = format_string($this->coursename, true);
             $certissue->timecreated = time();
             $certissue->code = $this->get_issue_uuid();
-            $certissue->validationphoto = 0;
+            //$certissue->validationphoto = 0;
+            //$certissue->userphoto = false;
 
             if (!has_capability('mod/customcertificate:manage', $this->context)) {
                 $certissue->id = $DB->insert_record('customcertificate_issues', $certissue);
             } else {
                 $certissue->id = rand(0, 4);
+                //print_error("pas de sauvegarde dans la dbb");
             }
 
             // Email to the teachers and anyone else
@@ -197,6 +199,20 @@ class customcertificate {
                 $this->send_alert_email_others();
         }
         return $certissue;
+    }
+
+    function get_user_photo($user) {
+        global $DB;
+        if(!$userphoto = $DB->get_record('customcertificate_userphoto', array('userid' => $user->id, 'certificateid' => $this->id)))
+        {
+            $userphoto = new stdClass();
+            $userphoto->certificateid = $this->id;
+            $userphoto->userid = $user->id;
+            $userphoto->userphoto = null;
+            $userphoto->validationphoto = 0;
+            $userphoto->id = $DB->insert_record('customcertificate_userphoto', $userphoto);
+        }
+        return $userphoto;
     }
 
     /**
@@ -486,10 +502,12 @@ class customcertificate {
         $imagefileinfo = self::get_certificate_image_fileinfo($this->context->id);
         // Get file
         $imagefile = $fs->get_file($imagefileinfo['contextid'], $imagefileinfo['component'], $imagefileinfo['filearea'], $imagefileinfo['itemid'], $imagefileinfo['filepath'], $this->certificateimage);
-        if($this->userphoto != null)
+        
+        if(!$issueuserphoto = $DB->get_record('customcertificate_userphoto', array('userid' => $USER->id, 'certificateid' => $this->id)))
         {
-            $imagefileuser = $fs->get_file($imagefileinfo['contextid'], $imagefileinfo['component'], $imagefileinfo['filearea'], $imagefileinfo['itemid'], $imagefileinfo['filepath'], $this->userphoto);
+            print_error("userphoto pas dans la bdd");
         }
+        $imagefileuser = $fs->get_file($issueuserphoto->contextid, $issueuserphoto->component, $issueuserphoto->filearea, $issueuserphoto->itemid, $issueuserphoto->filepath, $issueuserphoto->userphoto);
 
         // Read contents
         if ($imagefile) {
@@ -498,9 +516,13 @@ class customcertificate {
             print_error(get_string('filenotfound', 'customcertificate', $this->certificateimage));
         }
 
-        if (isset($imagefileuser) && $imagefileuser){
+        if ($imagefileuser){
             $temp_manager2 = $this->move_temp_dir($imagefileuser);
         }
+        else {
+            print_error(get_string('filenotfound', 'customcertificate', $issueuserphoto->userphoto));
+        }
+
 
 
         $pdf = new TCPDF($this->orientation, 'mm', array($this->width, $this->height), true, 'UTF-8', true, false);
