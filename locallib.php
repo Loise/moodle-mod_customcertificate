@@ -52,6 +52,8 @@ class customcertificate {
     public $width;
     public $height;
     public $certificateimage;
+    public $addphotox;
+    public $addphotoy;
     public $certificatetext;
     public $certificatetextformat;
     public $certificatetextx;
@@ -519,11 +521,6 @@ class customcertificate {
         if ($imagefileuser){
             $temp_manager2 = $this->move_temp_dir($imagefileuser);
         }
-        else {
-            print_error(get_string('filenotfound', 'customcertificate', $issueuserphoto->userphoto));
-        }
-
-
 
         $pdf = new TCPDF($this->orientation, 'mm', array($this->width, $this->height), true, 'UTF-8', true, false);
         $pdf->SetTitle($this->name);
@@ -540,7 +537,7 @@ class customcertificate {
         $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
         if(isset($temp_manager2))
         {
-            $pdf->Image($temp_manager2->absolutefilepath, 0, 0, $this->width/2, $this->height/2);
+            $pdf->Image($temp_manager2->absolutefilepath, $this->addphotox, $this->addphotoy, 50, 50);
         }
 
 	    $pdf->SetXY($this->introcertificatetextx, $this->introcertificatetexty);

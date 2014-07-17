@@ -68,6 +68,8 @@ $string['emailteachers'] = 'Enviar email para os Professores';
 $string['emailothers'] = 'Enviar email para outros';
 $string['emailfrom'] = 'Nome alternativo do remetendo do email';
 $string['addphoto'] = 'Agregar un certificado foto';
+$string['addphotox'] = 'Posição Horizontal do foto del participação do certificado';
+$string['addphotoy'] = 'Posição Verticale do foto del participação do certificado';
 $string['savecert'] = 'Salvar os certificados';
 $string['delivery'] = 'Envio';
 //Delivery options
@@ -176,6 +178,9 @@ $string['defaultwidth'] = 'Largura Padrão';
 $string['defaultheight'] = 'Altura Padrão';
 $string['defaultcertificatetextx'] = 'Posição Horizontal padrão do texto do certificado';
 $string['defaultcertificatetexty'] = 'Posição Vertical padrão do texto do certificado';
+
+$string['defaultaddphotox'] = 'Posição Horizontal padrão do foto del participação do certificado';
+$string['defaultaddphotoy'] = 'Posição Vertical padrão do foto del participação do certificado';
 
 
 //Erros

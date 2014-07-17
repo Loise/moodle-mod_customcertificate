@@ -74,6 +74,8 @@ $string['emailteachers'] = 'Courriels des professeurs';
 $string['emailothers'] = 'Autres adresses courriel';
 $string['emailfrom'] = 'Adresse de courriel';
 $string['addphoto'] = 'Ajouter une photo au certificat';
+$string['addphotox'] = 'Position horizontale de la photo de l\'utilisateur';
+$string['addphotoy'] = 'Position verticale de la photo de l\'utilisateur';
 $string['savecert'] = 'Sauvez les certificats';
 $string['delivery'] = 'Emission';
 //Delivery options
@@ -240,11 +242,15 @@ Vous pouvez le voir ici :
 $string['defaultwidth'] = 'Largeur par défaut';
 $string['defaultheight'] = 'Hauteur par défaut';
 $string['defaultcertificatetextx'] = 'Position horizontale du texte par défaut';
-$string['defaultcertificatetexty'] = 'Position verticae du texte par défaut';
+$string['defaultcertificatetexty'] = 'Position verticale du texte par défaut';
 $string['defaultintrocertificatetextx'] = 'Position horizontale du texte d\'introduction par défaut';
 $string['defaultintrocertificatetexty'] = 'Position verticale du texte d\'introduction par défaut';
 $string['defaultconclucertificatetextx'] = 'Position horizontale du texte de conclusion par défaut';
 $string['defaultconclucertificatetexty'] = 'Position verticale du texte de conclusion par défaut';
+
+$string['defaultheight'] = 'Hauteur par défaut';
+$string['defaultaddphotox'] = 'Position horizontale de la photo de l\'utilisateur par défaut';
+$string['defaultaddphotoy'] = 'Position verticale de la photo de l\'utilisateur par défaut';
 
 //Erros
 $string['filenotfound'] = 'Fichier non trouvé : {$a}';

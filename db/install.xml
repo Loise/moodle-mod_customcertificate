@@ -23,7 +23,7 @@
                 <FIELD NAME="introcertificatetextformat" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="introcertificatetext" NEXT="introcertificatetextx"/>
                 <FIELD NAME="introcertificatetextx" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="introcertificatetextformat" NEXT="introcertificatetexty"/>
                 <FIELD NAME="introcertificatetexty" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="50" SEQUENCE="false" PREVIOUS="introcertificatetextx" NEXT="conclucertificatetext"/>
-		<FIELD NAME="conclucertificatetext" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="introcertificatetexty" NEXT="conclucertificatetextformat"/>
+		        <FIELD NAME="conclucertificatetext" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="introcertificatetexty" NEXT="conclucertificatetextformat"/>
                 <FIELD NAME="conclucertificatetextformat" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="conclucertificatetext" NEXT="conclucertificatetextx"/>
                 <FIELD NAME="conclucertificatetextx" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="conclucertificatetextformat" NEXT="conclucertificatetexty"/>
                 <FIELD NAME="conclucertificatetexty" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="50" SEQUENCE="false" PREVIOUS="conclucertificatetextx" NEXT="coursename"/>
@@ -38,6 +38,8 @@
                 <FIELD NAME="emailothers" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="emailfrom" NEXT="emailteachers"/>
                 <FIELD NAME="emailteachers" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="emailothers" NEXT="addphoto"/>
                 <FIELD NAME="addphoto" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="emailteachers" NEXT="savecert"/>
+                <FIELD NAME="addphotox" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="addphoto" NEXT="addphotoy"/>
+                <FIELD NAME="addphotoy" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="addphotox" NEXT="savecert"/>
                 <FIELD NAME="savecert" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="addphoto" NEXT="reportcert"/>
                 <FIELD NAME="reportcert" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="savecert" NEXT="delivery"/>
                 <FIELD NAME="delivery" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="reportcert" NEXT="requiredtime"/>
@@ -64,6 +66,7 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
             </KEYS>
         </TABLE>
+
         <TABLE NAME="customcertificate_userphoto" COMMENT="User photo of issues of customcertificate module"
                PREVIOUS="customcertificate_issues">
             <FIELDS>

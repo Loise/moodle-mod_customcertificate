@@ -42,6 +42,11 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('customcertificate/addphoto',
         get_string('addphoto', 'customcertificate'), get_string('addphoto_help', 'customcertificate'), 1));
 
+    $settings->add(new admin_setting_configtext('customcertificate/addphotox', get_string('defaultaddphotox', 'customcertificate'),
+        get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
+    $settings->add(new admin_setting_configtext('customcertificate/addphotoy', get_string('defaultaddphotoy', 'customcertificate'),
+        get_string('textposition_help', 'customcertificate'), 20, PARAM_INT));
+
     $settings->add(new admin_setting_configcheckbox('customcertificate/savecert',
         get_string('savecert', 'customcertificate'), get_string('savecert_help', 'customcertificate'), 1));
 
