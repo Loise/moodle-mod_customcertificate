@@ -75,7 +75,9 @@ $string['emailothers'] = 'Email Others';
 $string['emailfrom'] = 'Email From name';
 $string['addphoto'] = 'Add photo to certificate';
 $string['addphotox'] = 'User photo Horizontal Position';
-$string['addphotoy'] = 'CUser photo Vertical Position';
+$string['addphotoy'] = 'User photo Vertical Position';
+$string['addphotowidth'] = 'User photo width';
+$string['addphotoheight'] = 'User photo height';
 $string['savecert'] = 'Save Certificates';
 $string['delivery'] = 'Delivery';
 //Delivery options
@@ -188,6 +190,8 @@ $string['defaultconclucertificatetexty'] = 'Default Conclusion Vertical Text Pos
 
 $string['defaultaddphotox'] = 'Default Hotizontal User Photo Position';
 $string['defaultaddphotoy'] = 'Default Vertical User Photo Position';
+$string['defaultaddphotowidth'] = 'Default User photo width';
+$string['defaultaddphotoheight'] = 'Default User photo height';
 
 //Erros
 $string['filenotfound'] = 'File not Found: {$a}';

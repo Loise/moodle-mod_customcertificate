@@ -70,6 +70,8 @@ $string['emailfrom'] = 'Nome alternativo do remetendo do email';
 $string['addphoto'] = 'Agregar un certificado foto';
 $string['addphotox'] = 'Posição Horizontal do foto del participação do certificado';
 $string['addphotoy'] = 'Posição Verticale do foto del participação do certificado';
+$string['addphotowidth'] = 'Ancho do foto del participação do certificado';
+$string['addphotoheight'] = 'Altura do foto del participação do certificado';
 $string['savecert'] = 'Salvar os certificados';
 $string['delivery'] = 'Envio';
 //Delivery options
@@ -181,6 +183,8 @@ $string['defaultcertificatetexty'] = 'Posição Vertical padrão do texto do cer
 
 $string['defaultaddphotox'] = 'Posição Horizontal padrão do foto del participação do certificado';
 $string['defaultaddphotoy'] = 'Posição Vertical padrão do foto del participação do certificado';
+$string['defaultaddphotowidth'] = 'Ancho padrão do foto del participação do certificado';
+$string['defaultaddphotoheight'] = 'Altura padrão do foto del participação do certificado';
 
 
 //Erros

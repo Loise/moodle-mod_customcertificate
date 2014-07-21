@@ -54,6 +54,8 @@ class customcertificate {
     public $certificateimage;
     public $addphotox;
     public $addphotoy;
+    public $addphotowidth;
+    public $addphotoheight;
     public $certificatetext;
     public $certificatetextformat;
     public $certificatetextx;
@@ -537,7 +539,7 @@ class customcertificate {
         $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
         if(isset($temp_manager2))
         {
-            $pdf->Image($temp_manager2->absolutefilepath, $this->addphotox, $this->addphotoy, 50, 50);
+            $pdf->Image($temp_manager2->absolutefilepath, $this->addphotox, $this->addphotoy, $this->addphotowidth, $this->addphotoheight);
         }
 
 	    $pdf->SetXY($this->introcertificatetextx, $this->introcertificatetexty);
