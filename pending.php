@@ -23,14 +23,13 @@ echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate')
 echo html_writer::tag('p', "Your picture is being validated, please wait.", array('style' => 'text-align:center'));
 
 
-if (!$certificate = $DB->get_record('customcertificate', array('id'=> $id))) {
-    print_error('course module is incorrect');
+if(!$issueuserphoto = $DB->get_record('customcertificate_userphoto', array('userid' => $USER->id, 'certificateid' => $id)))
+{
+	print_error('course module is incorrect');
 }
-
-$certificate->addphoto = false;
-$DB->update_record('customcertificate', $certificate);
-
-//Send event
-customcertificate_send_event($certificate);
+else
+{	
+	$DB->set_field('customcertificate_userphoto', 'validationphoto', "pending", array('userid' => $USER->id, 'certificateid' => $id));
+}
 
 echo $OUTPUT->footer();

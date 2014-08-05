@@ -213,7 +213,7 @@ class customcertificate {
             $userphoto->certificateid = $this->id;
             $userphoto->userid = $user->id;
             $userphoto->userphoto = null;
-            $userphoto->validationphoto = 0;
+            $userphoto->validationphoto = "notvalidated";
             $userphoto->id = $DB->insert_record('customcertificate_userphoto', $userphoto);
         }
         return $userphoto;

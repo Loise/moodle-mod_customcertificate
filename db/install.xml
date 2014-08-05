@@ -76,7 +76,7 @@
                  <FIELD NAME="certificateid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
                 <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="certificateid" NEXT="userphoto"/>
                  <FIELD NAME="userphoto" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="code" NEXT="userid"/>
-                 <FIELD NAME="validationphoto" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="userphoto" NEXT="contextid"/>
+                 <FIELD NAME="validationphoto" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="userphoto" NEXT="contextid"/>
                  <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="validationphoto" NEXT="component"/>
                   <FIELD NAME="component" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="contextid" NEXT="filearea"/>
                   <FIELD NAME="filearea" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="component" NEXT="itemid"/>

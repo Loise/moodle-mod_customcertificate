@@ -672,3 +672,52 @@ function customcertificate_get_issues($certificateid, $sort="ci.timecreated ASC"
 
     return $users;
 }
+
+function customcertificate_get_userphoto($certificateid, $groupmode, $cm) {
+    global $CFG, $DB;
+
+    // get all users that can manage this certificate to exclude them from the report.
+    $context = get_context_instance(CONTEXT_MODULE, $cm->id);
+    $certmanagers = get_users_by_capability($context, 'mod/customcertificate:manage', 'u.id');
+
+    // Setup pagination - when both $page and $perpage = 0, get all results
+    // Get all the users that have certificates issued, should only be one issue per user for a certificate
+    $users = $DB->get_records_sql("SELECT u.*
+                FROM {user} u
+                INNER JOIN {customcertificate_userphoto} ci
+                ON u.id = ci.userid
+                WHERE ci.certificateid = :certificateid", array('certificateid' => $certificateid));
+
+    // now exclude all the certmanagers.
+    foreach ($users as $id => $user) {
+        if (isset($certmanagers[$id])) { //exclude certmanagers.
+            unset($users[$id]);
+        }
+    }
+
+    // if groupmembersonly used, remove users who are not in any group
+    if (!empty($users) and !empty($CFG->enablegroupings) and $cm->groupmembersonly) {
+        if ($groupingusers = groups_get_grouping_members($cm->groupingid, 'u.id', 'u.id')) {
+            $users = array_intersect($users, array_keys($groupingusers));
+        }
+    }
+
+    if ($groupmode) {
+        $currentgroup = groups_get_activity_group($cm);
+        if ($currentgroup) {
+            $groupusers = groups_get_members($currentgroup, 'u.*');
+            if (empty($groupusers)) {
+                return array();
+            }
+            foreach($users as $id => $unused) {
+                if (!isset($groupusers[$id])) {
+                    // remove this user as it isn't in the group!
+                    unset($users[$id]);
+                }
+            }
+        }
+    }
+
+    return $users;
+}
+
