@@ -53,6 +53,29 @@ if (!$data = $mform->get_data()) {
          $DB->set_field('customcertificate_userphoto', 'validationphoto', "validated", array('userid' => $user->id, 'certificateid' => $certificate->id));
       }
    }
+
+   /*
+   $racine = "./pix/userphoto/".$certificate->id;
+
+   if (is_dir($racine)) { 
+      $objects = scandir($racine); 
+      foreach ($objects as $object) { 
+         if ($object != "." && $object != "..") { 
+            if (filetype($racine."/".$object) == "dir") 
+            {
+               rrmdir($racine."/".$object); 
+            }
+            else 
+            {
+               unlink($racine."/".$object); 
+            }
+         } 
+      } 
+      reset($objects); 
+      rmdir($racine); 
+   } 
+   */
+
 }
 
 echo $OUTPUT->footer();

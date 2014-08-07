@@ -11,6 +11,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once('addphoto_form.php');
+require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
 $id = required_param('id', PARAM_INT);
@@ -36,11 +37,8 @@ if (!$data = $mform->get_data()) {
     $fs->delete_area_files($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],$fileinfo['itemid']);
     
     $mform->save_stored_file('userphoto', $fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $mform->get_new_filename('userphoto'));
-    //file_save_draft_area_files($data->userphoto, $context->id, 'course', 'courseimage', 0);
 
-    //file_save_draft_area_files($data->userphoto, $context->id, 'mod_customcertificate', 'userphoto', 0, array('subdirs' => 0, 'maxbytes' => 102400, 'maxfiles' => 50));
-
-    //file_save_draft_area_files($data->userphoto, $context->id, 'mod_customcertificate', 'userphoto', 0);
+    
 
     if (!$certificate = $DB->get_record('customcertificate', array('id'=> $id))) {
         print_error('certificate module is incorrect');
@@ -51,6 +49,22 @@ if (!$data = $mform->get_data()) {
     }
     else
     {
+        $imagefileuser = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $mform->get_new_filename('userphoto'));
+        $racine = "./pix/userphoto/";
+        if(!is_dir($racine)){
+            mkdir($racine, 0700);
+        }
+
+        if(!is_dir($racine.'/'.$userphoto->id)){
+            mkdir($racine.'/'.$userphoto->id, 0700);
+        }
+                        
+        $dir = $CFG->tempdir;
+        $prefix = "mod_customcertificate";
+
+        $fullfilepath = $racine.'/'.$userphoto->id . '/' . $mform->get_new_filename('userphoto');
+        $imagefileuser->copy_content_to($fullfilepath);
+
         //$issueuserphoto->userphoto = $mform->get_new_filename('userphoto');
         $DB->set_field('customcertificate_userphoto', 'userphoto', $mform->get_new_filename('userphoto'), array('userid' => $USER->id, 'certificateid' => $id));
         $DB->set_field('customcertificate_userphoto', 'contextid', $fileinfo['contextid'], array('userid' => $USER->id, 'certificateid' => $id));
