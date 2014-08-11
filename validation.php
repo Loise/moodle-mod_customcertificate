@@ -33,7 +33,8 @@ if (!$data = $mform->get_data()) {
    }else {
       print_error('You don\'t have the permission for access at this page');
    }
-}else
+}
+else
 {
    if (!$cm = get_coursemodule_from_id('customcertificate', $id)) {
       print_error('Course Module ID was incorrect');
@@ -54,27 +55,7 @@ if (!$data = $mform->get_data()) {
       }
    }
 
-   /*
-   $racine = "./pix/userphoto/".$certificate->id;
-
-   if (is_dir($racine)) { 
-      $objects = scandir($racine); 
-      foreach ($objects as $object) { 
-         if ($object != "." && $object != "..") { 
-            if (filetype($racine."/".$object) == "dir") 
-            {
-               rrmdir($racine."/".$object); 
-            }
-            else 
-            {
-               unlink($racine."/".$object); 
-            }
-         } 
-      } 
-      reset($objects); 
-      rmdir($racine); 
-   } 
-   */
+   echo html_writer::tag('p', 'Please refresh the page for anoher validation.', array('style' => 'text-align:center'));
 
 }
 

@@ -511,17 +511,15 @@ class customcertificate {
         {
             print_error("userphoto pas dans la bdd");
         }
-        $imagefileuser = $fs->get_file($issueuserphoto->contextid, $issueuserphoto->component, $issueuserphoto->filearea, $issueuserphoto->itemid, $issueuserphoto->filepath, $issueuserphoto->userphoto);
+        
+        $racine = "./pix/userphoto/".$issueuserphoto->id;
+        $fullfilepath = $racine . '/' . $issueuserphoto->userphoto;
 
         // Read contents
         if ($imagefile) {
             $temp_manager = $this->move_temp_dir($imagefile);
         } else {
             print_error(get_string('filenotfound', 'customcertificate', $this->certificateimage));
-        }
-
-        if ($imagefileuser){
-            $temp_manager2 = $this->move_temp_dir($imagefileuser);
         }
 
         $pdf = new TCPDF($this->orientation, 'mm', array($this->width, $this->height), true, 'UTF-8', true, false);
@@ -537,9 +535,9 @@ class customcertificate {
         $pdf->AddPage();
 
         $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
-        if(isset($temp_manager2))
+        if(is_file($fullfilepath))
         {
-            $pdf->Image($temp_manager2->absolutefilepath, $this->addphotox, $this->addphotoy, $this->addphotowidth, $this->addphotoheight);
+            $pdf->Image($fullfilepath, $this->addphotox, $this->addphotoy, $this->addphotowidth, $this->addphotoheight);
         }
 
 	    $pdf->SetXY($this->introcertificatetextx, $this->introcertificatetexty);

@@ -22,8 +22,6 @@ class addphoto_form extends moodleform {
             $mform->setType('name', PARAM_CLEAN);
         }
 
-        //$mform->addElement('filemanager', 'userphoto',  get_string('userphoto','customcertificate'), null, array('maxbytes' => $CFG->maxbytes, 'maxfiles' => 1, 'accepted_types' => array('image')));
-
         //Certificate image file
         $mform->addElement('filepicker', 'userphoto', get_string('userphoto','customcertificate'), null,
             array('maxbytes' => 102400, 'accepted_types' =>  array('image')));

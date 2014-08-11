@@ -43,39 +43,10 @@ class validation_form extends moodleform {
 
             if($issueuserphoto->validationphoto == "pending")
             {
-                /*$fs = get_file_storage();
-                $imagefileuser = $fs->get_file($issueuserphoto->contextid, $issueuserphoto->component, $issueuserphoto->filearea, $issueuserphoto->itemid, $issueuserphoto->filepath, $issueuserphoto->userphoto);
-
-                if ($imagefileuser) {
-                    $contents = $imagefileuser->get_content();
-                            //echo $contents;
-                            
-                    $racine = "./pix/userphoto/".$issueuserphoto->id;
-                    if(!is_dir($racine)){
-                        mkdir($racine, 0700);
-                    }
-                    
-                    $dir = $CFG->tempdir;
-                    $prefix = "mod_customcertificate";
-
-                    $fullfilepath = $racine . '/' . $imagefileuser->get_filename();
-                    $imagefileuser->copy_content_to($fullfilepath);
-
-                    //file_put_contents($racine.'/'.$user->id.'.pdf', $contents);
-
-                    $url = moodle_url::make_pluginfile_url($imagefileuser->get_contextid(), $imagefileuser->get_component(), $imagefileuser->get_filearea(), $imagefileuser->get_itemid(), $imagefileuser->get_filepath(), $imagefileuser->get_filename());
-                    $mform->addElement('html', '<img src="'.$fullfilepath.'"/>');
-                } else {
-                    print_error(get_string('filenotfound', 'customcertificate', $issueuserphoto->userphoto));
-                }
-
-                
-                */
                 $racine = "./pix/userphoto/".$issueuserphoto->id;
                 $fullfilepath = $racine . '/' . $issueuserphoto->userphoto;
                 $mform->addElement('html', '<img src="'.$fullfilepath.'"/>');
                 $mform->addElement('checkbox', 'validationphoto'.$user->id, $user->firstname.' '.$user->lastname);
-
             }
             
         
