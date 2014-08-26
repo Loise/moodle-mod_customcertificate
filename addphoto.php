@@ -15,6 +15,7 @@ require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
 $id = required_param('id', PARAM_INT);
+$retry = optional_param('retry', 0, PARAM_INT);
 
 $context = context_system::instance();
 $PAGE->set_url('/mod/customcertificate/addphoto.php', array('id' => $id));
@@ -27,6 +28,11 @@ $mform = new addphoto_form($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id
 if (!$data = $mform->get_data()) {
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
+    if($retry == 1)
+    {
+        echo html_writer::tag('p', "The name of your file contains special characters, thank you to fix that and try again.", array('style' => 'text-align:center'));
+        $retry = 0;
+    }
     $mform->display();
     add_to_log($context->instanceid, 'customcertificate', 'verify', 'addphoto.php?id='.$id);
     $mform->set_data(array('id'=>$id));
@@ -37,8 +43,6 @@ if (!$data = $mform->get_data()) {
     $fs->delete_area_files($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],$fileinfo['itemid']);
     
     $mform->save_stored_file('userphoto', $fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $mform->get_new_filename('userphoto'));
-
-    
 
     if (!$certificate = $DB->get_record('customcertificate', array('id'=> $id))) {
         print_error('certificate module is incorrect');
@@ -62,11 +66,36 @@ if (!$data = $mform->get_data()) {
         $dir = $CFG->tempdir;
         $prefix = "mod_customcertificate";
 
-        $fullfilepath = $racine.'/'.$userphoto->id . '/' . $mform->get_new_filename('userphoto');
-        $imagefileuser->copy_content_to($fullfilepath);
+        /*
+        //Normalisation de la chaine utf8 en mode caractère + accents
+        $filename = Normalizer::normalize($mform->get_new_filename('userphoto'), Normalizer::FORM_D);
+        //Suppression des accents
+        preg_replace('~\p{Mn}~u', '', $filename);
+        */
 
-        $DB->set_field('customcertificate_userphoto', 'userphoto', $mform->get_new_filename('userphoto'), array('userid' => $USER->id, 'certificateid' => $id));
+        
+        //$filename = htmlentities($mform->get_new_filename('userphoto'), ENT_NOQUOTES, 'utf-8');
+        //$filename = utf8_encode ($mform->get_new_filename('userphoto'));
+    
+        /*$filename = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $filename);
+        $filename = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $filename); // pour les ligatures e.g. '&oelig;'
+        $filename = preg_replace('#&[^;]+;#', '', $filename); // supprime les autres caractères*/
+
+        $filename =  $mform->get_new_filename('userphoto');
+
+        $pattern = "#^[a-zA-Z0-9_.]+$#i";
+        if (!(preg_match($pattern , $filename)))
+        {
+            header("Refresh: 0; url=addphoto.php?id=".$id."&retry=1");
+            //print_error("Ton nom de fichier n'est pas valide du tout !!!");
+        }
+        else
+        {
+            $fullfilepath = $racine.'/'.$userphoto->id . '/' . $filename;
+            $imagefileuser->copy_content_to($fullfilepath);
+
+            $DB->set_field('customcertificate_userphoto', 'userphoto', $filename, array('userid' => $USER->id, 'certificateid' => $id));
+            redirect($CFG->wwwroot.'/mod/customcertificate/pending.php?id=' . $id); 
+        }
     }
-
-    redirect($CFG->wwwroot.'/mod/customcertificate/pending.php?id=' . $id); 
 }

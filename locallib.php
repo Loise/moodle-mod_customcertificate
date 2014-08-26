@@ -512,9 +512,6 @@ class customcertificate {
             print_error("userphoto pas dans la bdd");
         }
         
-        $racine = "./pix/userphoto/".$issueuserphoto->id;
-        $fullfilepath = $racine . '/' . $issueuserphoto->userphoto;
-
         // Read contents
         if ($imagefile) {
             $temp_manager = $this->move_temp_dir($imagefile);
@@ -535,6 +532,10 @@ class customcertificate {
         $pdf->AddPage();
 
         $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
+
+        $racine = "./pix/userphoto/".$issueuserphoto->id;
+        $fullfilepath = $racine . '/' . $issueuserphoto->userphoto;
+
         if(is_file($fullfilepath))
         {
             $pdf->Image($fullfilepath, $this->addphotox, $this->addphotoy, $this->addphotowidth, $this->addphotoheight);
@@ -555,6 +556,24 @@ class customcertificate {
         $pdf->SetXY(100, 205);
         $pdf->SetFontSize(8);
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $CFG->wwwroot.'/mod/customcertificate/verify.php'), 0, 0, 0, true, 'L');
+
+        $idCourse = $issuecert->certificateid;
+        while(strlen($idCourse)<6)
+        {
+            $idCourse = '0'.$idCourse;
+        }
+        $idCode = $issuecert->id;
+        $racine = "./save";
+        if(!is_dir($racine)){
+            mkdir($racine, 0700);
+        }
+        $structure = $racine."/".$idCourse;
+        if(!is_dir($structure)){
+            mkdir($structure, 0700);
+        }
+        //file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
+
+        $pdf->Output($structure.'/'.$issuecert->userid.'.pdf', 'F');
 
         @remove_dir($temp_manager->path);
 
@@ -591,6 +610,7 @@ class customcertificate {
             $fs->create_file_from_string($fileinfo, $pdf->Output('', 'S'));
         }
 
+        /*
         //Test creation file Loise
         // Make id course and id user on 6 digits and idcertif on 4 digits
         $idCourse = "$this->course";
@@ -608,6 +628,7 @@ class customcertificate {
             mkdir($structure, 0700);
         }
         file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
+        */
 
         return true;
     }
@@ -725,6 +746,12 @@ class customcertificate {
                 $pdf->Output('', 'S'); // send
                 break;
         }
+    }
+
+    public function get_pdf($issuecert)
+    {
+        $pdf = $this->create_pdf($issuecert);
+        return $pdf;
     }
 
     private function get_certificate_text($certissue, $string) {

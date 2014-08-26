@@ -27,6 +27,7 @@ class addphoto_form extends moodleform {
             array('maxbytes' => 102400, 'accepted_types' =>  array('image')));
         $mform->addHelpButton('userphoto', 'userphoto', 'customcertificate');
         $mform->addRule('userphoto', get_string('error'), 'required', null, 'client');
+        $mform->addRule('userphoto', get_string('error'), 'alphanumeric', null, 'client');
         $this->add_action_buttons();
     }
 
