@@ -59,3 +59,4 @@ if (!$verifyform->get_data()) {
     echo html_writer::table($table);
 }
 echo $OUTPUT->footer();
+

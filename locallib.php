@@ -551,7 +551,7 @@ class customcertificate {
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->conclucertificatetext), 0, 0, 0, true, 'L');
 
         $pdf->SetXY(110, 195);
-        $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->get_issue_uuid()), 0, 0, 0, true, 'L');
+        $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $issuecert->code), 0, 0, 0, true, 'L');
 
         $pdf->SetXY(100, 205);
         $pdf->SetFontSize(8);
