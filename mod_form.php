@@ -119,10 +119,14 @@ class mod_customcertificate_mod_form extends moodleform_mod {
         $mform->setDefault('conclucertificatetexty', get_config('customcertificate', 'conclucertificatetexty'));
         $mform->setAdvanced('conclucertificatetexty');
 
-        //Add photo
-        $mform->addElement('selectyesno', 'addphoto', get_string('addphoto', 'customcertificate'));
-        $mform->setDefault('addphoto', get_config('customcertificate', 'addphoto'));
-        $mform->addHelpButton('addphoto', 'addphoto', 'customcertificate');
+        $url = $_SERVER["REQUEST_URI"];
+        if(!(strstr($url, 'update')))
+        {
+            //Add photo
+            $mform->addElement('selectyesno', 'addphoto', get_string('addphoto', 'customcertificate'));
+            $mform->setDefault('addphoto', get_config('customcertificate', 'addphoto'));
+            $mform->addHelpButton('addphoto', 'addphoto', 'customcertificate');
+        }
 
         //Photo Position X
         $mform->addElement('text', 'addphotox', get_string('addphotox', 'customcertificate'), array('size'=>'5'));
