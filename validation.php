@@ -57,8 +57,9 @@ else
       $check = 'validationphoto'.$user->id;
       if(isset($data->{$check}))
       {
-         echo html_writer::tag('p', 'the photo of the student '.$user->firstname.' '.$user->lastname.' have been valited.', array('style' => 'text-align:center'));
-         $DB->set_field('customcertificate_userphoto', 'validationphoto', "validated", array('userid' => $user->id, 'certificateid' => $certificate->id));
+        echo html_writer::tag('p', 'the photo of the student '.$user->firstname.' '.$user->lastname.' have been valited.', array('style' => 'text-align:center'));
+        $DB->set_field('customcertificate_userphoto', 'validationphoto', "validated", array('userid' => $user->id, 'certificateid' => $certificate->id));
+        email_to_user($user, format_string($user->email, true), "[Moodle] Your photo is validated !", "You can get your certificate at this link : ".$CFG->wwwroot.'/mod/customcertificate/view.php?id='.$id, '<font face="sans-serif"><p>You can get your certificate at this <a href="'.$CFG->wwwroot.'/mod/customcertificate/view.php?id='.$id.'">link</a></p></font>');
       }
    }
 

@@ -218,3 +218,4 @@ $string['customcertificate:manage'] = 'Manage a custom certificate instance';
 $string['customcertificate:printteacher'] = 'Be listed as a teacher on the custom certificate if the print teacher setting is on';
 $string['customcertificate:student'] = 'Retrieve a custom certificate';
 $string['customcertificate:view'] = 'View a custom certificate';
+
