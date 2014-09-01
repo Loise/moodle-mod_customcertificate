@@ -20,6 +20,13 @@ $PAGE->set_url('/mod/customcertificate/validation.php', array('id' => $id));
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('base');
 
+$coursenode = $PAGE->settingsnav->add(get_string('pluginadministration', 'customcertificate'));
+if ($coursenode) {
+    $coursenode->add('Validation pictures of students', './validation.php?id='.$id)->make_active();
+    $coursenode->add('Verification of certificate', './verify.php')->make_active();
+    $coursenode->add('Archive', './save.php?id='.$id)->make_active();
+}
+
 $mform = new validation_form($CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$id);
 
 echo $OUTPUT->header();

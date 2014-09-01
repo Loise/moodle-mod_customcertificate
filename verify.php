@@ -21,6 +21,7 @@ $PAGE->set_context($context);
 $PAGE->set_title(get_string('certificateverification', 'customcertificate'));
 $PAGE->set_heading(get_string('certificateverification', 'customcertificate'));
 $PAGE->set_pagelayout('base');
+
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
 $verifyform = new verify_form();
@@ -53,9 +54,23 @@ if (!$verifyform->get_data()) {
     $table = new html_table();
     $table->width = "95%";
     $table->tablealign = "center";
-    $table->head  = array($strto, $strcourse, $strdate, $strcode);
-    $table->align = array("center", "center", "center", "center");
-    $table->data[] = array ($username, $issuedcert->coursename, userdate($issuedcert->timecreated), $issuedcert->code);
+    $table->head  = array($strto, $strcourse, $strdate, $strcode, "PDF");
+    $table->align = array("center", "center", "center", "center", "center");
+
+    $issue = $DB->get_record('customcertificate_issues', array('certificateid' => $issuedcert->certificateid, 'userid' => $issuedcert->userid, 'timedeleted' => null ));
+
+    $idCourse = $issue->certificateid;
+    while(strlen($idCourse)<6)
+    {
+        $idCourse = '0'.$idCourse;
+    }
+    $idCode = $issue->id;
+    $structure = "save/".$idCourse;
+
+    $url = html_writer::tag('a', "Get the pdf", array('href' => $CFG->wwwroot . '/mod/customcertificate/' . $structure.'/'.$issuedcert->userid.'.pdf'));
+
+
+    $table->data[] = array ($username, $issuedcert->coursename, userdate($issuedcert->timecreated), $issuedcert->code, $url);
     echo html_writer::table($table);
 }
 echo $OUTPUT->footer();

@@ -720,4 +720,3 @@ function customcertificate_get_userphoto($certificateid, $groupmode, $cm) {
 
     return $users;
 }
-

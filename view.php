@@ -49,6 +49,13 @@ $PAGE->set_cm($cm);
 $PAGE->set_title(format_string($certificate->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+$coursenode = $PAGE->settingsnav->get('modulesettings');
+if ($coursenode) {
+    $coursenode->add('Validation pictures of students', './validation.php?id='.$cm->id)->make_active();
+    $coursenode->add('Verification of certificate', './verify.php')->make_active();
+    $coursenode->add('Archive', './save.php?id='.$cm->id)->make_active();
+}
+
 // Set the context
 $context = get_context_instance(CONTEXT_MODULE, $cm->id);
 
@@ -122,6 +129,7 @@ if (empty($action)) { // Not displaying PDF
         $str = get_string('openemail', 'customcertificate');
     }
     echo html_writer::tag('p', $str, array('style' => 'text-align:center'));
+
     $linkname = get_string('getcertificate', 'customcertificate');
     // Add to log, only if we are reissuing
     add_to_log($course->id, 'customcertificate', 'view', "view.php?id=$cm->id", $certificate->id, $cm->id);

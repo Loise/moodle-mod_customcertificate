@@ -19,6 +19,13 @@ $PAGE->set_url('/mod/customcertificate/save.php', array('id' => $id));
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('base');
 
+$coursenode = $PAGE->settingsnav->add(get_string('pluginadministration', 'customcertificate'));
+if ($coursenode) {
+    $coursenode->add('Validation pictures of students', './validation.php?id='.$id)->make_active();
+    $coursenode->add('Verification of certificate', './verify.php')->make_active();
+    $coursenode->add('Archive', './save.php?id='.$id)->make_active();
+}
+
 if (!$cm = get_coursemodule_from_id('customcertificate', $id)) {
    print_error('Course Module ID was incorrect');
 }
