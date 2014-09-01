@@ -95,6 +95,14 @@ if (!$data = $mform->get_data()) {
             $imagefileuser->copy_content_to($fullfilepath);
 
             $DB->set_field('customcertificate_userphoto', 'userphoto', $filename, array('userid' => $USER->id, 'certificateid' => $id));
+
+            $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
+            $context = get_context_instance(CONTEXT_COURSE, $certificate->course);
+            $teachers = get_role_users($role->id, $context);
+            foreach ($teachers as $teacher) {
+                email_to_user($teacher, format_string($teacher->email, true), "[Moodle] A user need a validation of photo !", "You can validation the users photos here : ".$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$id, '<font face="sans-serif"><p>You can validation the users photos here : '.$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$id.'">link</a></p></font>');
+            }
+            
             redirect($CFG->wwwroot.'/mod/customcertificate/pending.php?id=' . $id); 
         }
     }
