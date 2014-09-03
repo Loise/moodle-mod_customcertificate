@@ -554,7 +554,7 @@ class customcertificate {
 
         $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
 
-        $racine = $CFG->wwwroot ."./pix/userphoto/".$issueuserphoto->id;
+        $racine = "./pix/userphoto/".$issueuserphoto->id;
         $fullfilepath = $racine . '/' . $issueuserphoto->userphoto;
 
         if(is_file($fullfilepath))
@@ -583,10 +583,18 @@ class customcertificate {
 
         $pdf->Output($structure.'/'.$issuecert->userid.'.pdf', 'F');
 
-        /*if(is_file($fullfilepath))
+        if(is_file($fullfilepath))
         {
             unlink($fullfilepath);
-        }*/
+        }
+
+        if (count(scandir($racine)) == 2) {
+            rmdir($racine);
+        }
+
+        if (count(scandir("./pix/userphoto/")) == 2) {
+            rmdir("./pix/userphoto/");
+        }
 
         @remove_dir($temp_manager->path);
 
