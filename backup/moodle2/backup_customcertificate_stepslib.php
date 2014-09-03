@@ -46,7 +46,7 @@ class backup_customcertificate_activity_structure_step extends backup_activity_s
                 'certificatetextformat', 'certificatetextx', 'certificatetexty','introcertificatetext',
                 'introcertificatetextformat', 'introcertificatetextx', 'introcertificatetexty', 'conclucertificatetext',
                 'conclucertificatetextformat', 'conclucertificatetextx', 'conclucertificatetexty','certdate', 'certdatefmt',
-                'certgrade', 'gradefmt', 'emailfrom', 'emailothers', 'emailteachers', 'savecert', 'reportcert',
+                'certgrade', 'gradefmt', 'emailfrom', 'emailothers', 'emailteachers', 'addphoto', 'addphotox', 'addphotoy', 'addphotowidth', 'addphotoheight', 'savecert', 'reportcert',
                 'delivery', 'requiredtime', 'coursehours', 'outcome', 'coursename', 'timemodified'));
 
 
@@ -54,11 +54,18 @@ class backup_customcertificate_activity_structure_step extends backup_activity_s
         $issues = new backup_nested_element('issues');
 
         $issue = new backup_nested_element('issue', array('id'), array(
-                'certificateid', 'userid','username','userphoto', 'validationphoto', 'coursename', 'timecreated','timedeleted', 'code'));
+                'certificateid', 'userid','username', 'coursename', 'code', 'timecreated','timedeleted'));
+
+        $userphotos = new backup_nested_element('userphotos');
+
+        $userphoto = new backup_nested_element('userphoto', array('id'), array(
+                'certificateid', 'userid','userphoto', 'validationphoto'));
 
         // Build the tree
         $certificate->add_child($issues);
+        $certificate->add_child($userphotos);
         $issues->add_child($issue);
+        $userphotos->add_child($userphoto);
 
         // Define sources
         $certificate->set_source_table('customcertificate', array('id' => backup::VAR_ACTIVITYID));
@@ -66,14 +73,17 @@ class backup_customcertificate_activity_structure_step extends backup_activity_s
         // All the rest of elements only happen if we are including user info
         if ($userinfo) {
             $issue->set_source_table('customcertificate_issues', array('certificateid' => backup::VAR_PARENTID));
+            $issue->set_source_table('customcertificate_userphoto', array('certificateid' => backup::VAR_PARENTID));
         }
 
         // Annotate the user id's where required.
         $issue->annotate_ids('user', 'userid');
+        $userphoto->annotate_ids('user', 'userid');
 
         // Define file annotations
         $certificate->annotate_files('mod_customcertificate', customcertificate::CERTIFICATE_IMAGE_FILE_AREA, 'id');
         $issue->annotate_files('mod_customcertificate', customcertificate::CERTIFICATE_ISSUES_FILE_AREA, 'id'); // This file area hasn't itemid
+        $userphoto->annotate_files('mod_customcertificate', customcertificate::CERTIFICATE_ISSUES_FILE_AREA, 'id'); // This file area hasn't itemid
         
         // Return the root element (certificate), wrapped into standard activity structure
         return $this->prepare_activity_structure($certificate);

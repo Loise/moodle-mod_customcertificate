@@ -588,12 +588,18 @@ class customcertificate {
             unlink($fullfilepath);
         }
 
-        if (count(scandir($racine)) == 2) {
-            rmdir($racine);
+        if (is_dir($racine))
+        { 
+            if(count(scandir($racine)) == 2) {
+                rmdir($racine);
+            }
         }
 
-        if (count(scandir("./pix/userphoto/")) == 2) {
-            rmdir("./pix/userphoto/");
+        if (is_dir("./pix/userphoto/"))
+        { 
+            if(count(scandir("./pix/userphoto/")) == 2) {
+                rmdir("./pix/userphoto/");
+            }
         }
 
         @remove_dir($temp_manager->path);

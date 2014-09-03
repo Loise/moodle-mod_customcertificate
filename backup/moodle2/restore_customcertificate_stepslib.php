@@ -40,6 +40,7 @@ class restore_customcertificate_activity_structure_step extends restore_activity
 
         if ($userinfo) {
             $paths[] = new restore_path_element('customcertificate_issue', '/activity/customcertificate/issues/issue');
+            $paths[] = new restore_path_element('customcertificate_userphoto', '/activity/customcertificate/issues/issue');
         }
 
         // Return the paths wrapped into standard activity structure
@@ -73,6 +74,19 @@ class restore_customcertificate_activity_structure_step extends restore_activity
         $this->set_mapping('customcertificate_issue', $oldid, $newitemid);
     }
 
+    protected function process_customcertificate_userphoto($data) {
+        global $DB;
+
+        $data = (object)$data;
+        $oldid = $data->id;
+
+        $data->certificateid = $this->get_new_parentid('customcertificate');
+        $data->timecreated = $this->apply_date_offset($data->timecreated);
+
+        $newitemid = $DB->insert_record('customcertificate_userphoto', $data);
+        $this->set_mapping('customcertificate_userphoto', $oldid, $newitemid);
+    }
+
     protected function after_execute() {
         global $CFG;
         require_once("$CFG->dirroot/mod/customcertificate/locallib.php");
@@ -80,5 +94,6 @@ class restore_customcertificate_activity_structure_step extends restore_activity
         // Add customcertificate related files, no need to match by itemname (just internally handled context)
         $this->add_related_files('mod_customcertificate', customcertificate::CERTIFICATE_IMAGE_FILE_AREA, 0);
         $this->add_related_files('mod_customcertificate', customcertificate::CERTIFICATE_ISSUES_FILE_AREA, 'customcertificate_issue');
+        $this->add_related_files('mod_customcertificate', customcertificate::CERTIFICATE_ISSUES_FILE_AREA, 'customcertificate_userphoto');
     }
 }
