@@ -99,7 +99,7 @@ if($certificate->addphoto == 1)
     }
 }
 
-if (empty($action)) { // Not displaying PDF
+//if (empty($action)) { // Not displaying PDF
     echo $OUTPUT->header();
 
     /// find out current groups mode
@@ -121,6 +121,8 @@ if (empty($action)) { // Not displaying PDF
     if ($attempts = $customcertificate->get_attempts()) {
         echo $customcertificate->print_attempts($attempts);
     }
+    
+    /*
     if ($certificate->delivery == 0)    {
         $str = get_string('openwindow', 'customcertificate');
     } elseif ($certificate->delivery == 1)    {
@@ -128,7 +130,9 @@ if (empty($action)) { // Not displaying PDF
     } elseif ($certificate->delivery == 2)    {
         $str = get_string('openemail', 'customcertificate');
     }
-    echo html_writer::tag('p', $str, array('style' => 'text-align:center'));
+    */
+
+    //echo html_writer::tag('p', $str, array('style' => 'text-align:center'));
 
     $linkname = get_string('getcertificate', 'customcertificate');
     // Add to log, only if we are reissuing
@@ -139,15 +143,22 @@ if (empty($action)) { // Not displaying PDF
     //$issuecertificates = $DB->get_records('customcertificate_issues', array('certificateid' => $certificate->id, 'timedeleted' => null));
 
 
-    $link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
+    /*$link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
     $button = new single_button($link, $linkname);
     $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
+    */
 
-	echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
+    $linkpdf = $customcertificate->output_pdf($certrecord);
+
+    echo '<a href="'.$linkpdf.'"" target="_blank">Get your certificate</a>';
+
+    //echo html_writer::tag('a', "Get the certificate", array('href' => $linkpdf, 'target' => '_blank'));
+
+	//echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
 	echo $OUTPUT->footer($course);
 	exit;
-} else { // Output to pdf
+/*} else { // Output to pdf
     $customcertificate->output_pdf($certrecord);
-}
+}*/
 
 

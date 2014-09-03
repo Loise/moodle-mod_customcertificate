@@ -90,6 +90,7 @@ class customcertificate {
     private $orientation = '';
     private $cm;
 
+
     public function __construct(stdclass $dbrecord, stdclass $context = null) {
         global $DB;
 
@@ -499,6 +500,26 @@ class customcertificate {
     private function create_pdf($issuecert) {
         global $DB, $USER, $CFG;
 
+        $idCourse = $issuecert->certificateid;
+        while(strlen($idCourse)<6)
+        {
+            $idCourse = '0'.$idCourse;
+        }
+        $idCode = $issuecert->id;
+        $racine = "./save";
+        if(!is_dir($racine)){
+            mkdir($racine, 0700);
+        }
+        $structure = $racine."/".$idCourse;
+        if(!is_dir($structure)){
+            mkdir($structure, 0700);
+        }
+
+        if(is_file($structure.'/'.$issuecert->userid.'.pdf'))
+        {
+            return $structure.'/'.$issuecert->userid.'.pdf';
+        }
+
         //Getting certificare image
         $fs = get_file_storage();
 
@@ -533,7 +554,7 @@ class customcertificate {
 
         $pdf->Image($temp_manager->absolutefilepath, 0, 0, $this->width, $this->height);
 
-        $racine = "./pix/userphoto/".$issueuserphoto->id;
+        $racine = $CFG->wwwroot ."./pix/userphoto/".$issueuserphoto->id;
         $fullfilepath = $racine . '/' . $issueuserphoto->userphoto;
 
         if(is_file($fullfilepath))
@@ -557,28 +578,23 @@ class customcertificate {
         $pdf->SetFontSize(8);
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $CFG->wwwroot.'/mod/customcertificate/verify.php'), 0, 0, 0, true, 'L');
 
-        $idCourse = $issuecert->certificateid;
-        while(strlen($idCourse)<6)
-        {
-            $idCourse = '0'.$idCourse;
-        }
-        $idCode = $issuecert->id;
-        $racine = "./save";
-        if(!is_dir($racine)){
-            mkdir($racine, 0700);
-        }
-        $structure = $racine."/".$idCourse;
-        if(!is_dir($structure)){
-            mkdir($structure, 0700);
-        }
+        
         //file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
 
         $pdf->Output($structure.'/'.$issuecert->userid.'.pdf', 'F');
 
+        /*if(is_file($fullfilepath))
+        {
+            unlink($fullfilepath);
+        }*/
+
         @remove_dir($temp_manager->path);
 
-        return $pdf;
+        //return $pdf;
+        return $structure.'/'.$issuecert->userid.'.pdf';
     }
+
+    
 
     /**
      * This function returns success or failure of file save
@@ -723,7 +739,9 @@ class customcertificate {
     }
 
     public function output_pdf($issuecert) {
-        $pdf = $this->create_pdf($issuecert);
+        $linkpdf = $this->create_pdf($issuecert);
+        return $linkpdf;
+        /*
         $filename = clean_filename($this->name . '.pdf');
 
         if ($this->savecert == 1) {
@@ -745,7 +763,8 @@ class customcertificate {
                 $pdf->Output($filename, 'I'); // open in browser
                 $pdf->Output('', 'S'); // send
                 break;
-        }
+        }*/
+
     }
 
     public function get_pdf($issuecert)

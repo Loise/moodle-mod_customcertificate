@@ -48,6 +48,11 @@ if (!$data = $mform->get_data()) {
         print_error('certificate module is incorrect');
     }
 
+    if(!$cm = get_coursemodule_from_instance('customcertificate', $certificate->id))
+    {
+        print_error('Course Module ID was incorrect');
+    }
+    
     if (!$userphoto = $DB->get_record('customcertificate_userphoto', array('userid' => $USER->id, 'certificateid' => $id))) {
         print_error(get_string('invalidcode','customcertificate'));
     }
@@ -100,7 +105,7 @@ if (!$data = $mform->get_data()) {
             $context = get_context_instance(CONTEXT_COURSE, $certificate->course);
             $teachers = get_role_users($role->id, $context);
             foreach ($teachers as $teacher) {
-                email_to_user($teacher, format_string($teacher->email, true), "[Moodle] A user need a validation of photo !", "You can validation the users photos here : ".$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$id, '<font face="sans-serif"><p>You can validation the users photos here : '.$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$id.'">link</a></p></font>');
+                email_to_user($teacher, format_string($teacher->email, true), "[Moodle] A user need a validation of photo !", "You can validation the users photos here : ".$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$cm->id, '<font face="sans-serif"><p>You can validation the users photos <a href="'.$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$cm->id.'">link</a></p></font>');
             }
             
             redirect($CFG->wwwroot.'/mod/customcertificate/pending.php?id=' . $id); 
