@@ -69,6 +69,12 @@ if (!$download) {
     $PAGE->navbar->add($strreport);
     $PAGE->set_title(format_string($certificate->name).": $strreport");
     $PAGE->set_heading($course->fullname);
+    $coursenode = $PAGE->settingsnav->get('modulesettings');
+    if ($coursenode) {
+        $coursenode->add('Validation pictures of students', './validation.php?id='.$cm->id)->make_active();
+        $coursenode->add('Verification of certificate', './verify.php')->make_active();
+        $coursenode->add('Archive', './save.php?id='.$cm->id)->make_active();
+    }
     // Check to see if groups are being used in this choice
     if ($groupmode = groups_get_activity_groupmode($cm)) {
         groups_get_activity_group($cm, true);

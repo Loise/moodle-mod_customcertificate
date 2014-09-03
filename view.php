@@ -87,6 +87,11 @@ $certrecord = $customcertificate->get_issue($USER);
 $userphoto = $customcertificate->get_user_photo($USER);
 //$userphoto = $DB->get_record('customcertificate_userphoto', array('code' => $certrecord->code));
 
+if (has_capability('mod/customcertificate:manage', $context)) 
+{
+    redirect($CFG->wwwroot.'/mod/customcertificate/report.php?id=' . $id); 
+}
+
 if($certificate->addphoto == 1)
 {
     if($userphoto->validationphoto == "notvalidated")
