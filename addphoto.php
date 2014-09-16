@@ -71,28 +71,12 @@ if (!$data = $mform->get_data()) {
         $dir = $CFG->tempdir;
         $prefix = "mod_customcertificate";
 
-        /*
-        //Normalisation de la chaine utf8 en mode caractère + accents
-        $filename = Normalizer::normalize($mform->get_new_filename('userphoto'), Normalizer::FORM_D);
-        //Suppression des accents
-        preg_replace('~\p{Mn}~u', '', $filename);
-        */
-
-        
-        //$filename = htmlentities($mform->get_new_filename('userphoto'), ENT_NOQUOTES, 'utf-8');
-        //$filename = utf8_encode ($mform->get_new_filename('userphoto'));
-    
-        /*$filename = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $filename);
-        $filename = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $filename); // pour les ligatures e.g. '&oelig;'
-        $filename = preg_replace('#&[^;]+;#', '', $filename); // supprime les autres caractères*/
-
         $filename =  $mform->get_new_filename('userphoto');
 
         $pattern = "#^[a-zA-Z0-9_.]+$#i";
         if (!(preg_match($pattern , $filename)))
         {
             header("Refresh: 0; url=addphoto.php?id=".$id."&retry=1");
-            //print_error("Ton nom de fichier n'est pas valide du tout !!!");
         }
         else
         {

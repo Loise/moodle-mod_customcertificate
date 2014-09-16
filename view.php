@@ -85,7 +85,6 @@ if ($certificate->requiredtime && !has_capability('mod/certificate:manage', $con
 // Create new certificate record, or return existing record
 $certrecord = $customcertificate->get_issue($USER);
 $userphoto = $customcertificate->get_user_photo($USER);
-//$userphoto = $DB->get_record('customcertificate_userphoto', array('code' => $certrecord->code));
 
 if (has_capability('mod/customcertificate:manage', $context)) 
 {
@@ -104,66 +103,37 @@ if($certificate->addphoto == 1)
     }
 }
 
-//if (empty($action)) { // Not displaying PDF
-    echo $OUTPUT->header();
+echo $OUTPUT->header();
 
-    /// find out current groups mode
-    groups_print_activity_menu($cm, $CFG->wwwroot . '/mod/customcertificate/view.php?id=' . $cm->id);
-    $currentgroup = groups_get_activity_group($cm);
-    $groupmode = groups_get_activity_groupmode($cm);
+/// find out current groups mode
+groups_print_activity_menu($cm, $CFG->wwwroot . '/mod/customcertificate/view.php?id=' . $cm->id);
+$currentgroup = groups_get_activity_group($cm);
+$groupmode = groups_get_activity_groupmode($cm);
 
-    if (has_capability('mod/customcertificate:manage', $context)) {
-        $numusers = count(customcertificate_get_issues($certificate->id, 'ci.timecreated ASC', $groupmode, $cm));
-        $url = html_writer::tag('a', get_string('viewcertificateviews', 'customcertificate', $numusers),
-            array('href' => $CFG->wwwroot . '/mod/customcertificate/report.php?id=' . $cm->id));
-        echo html_writer::tag('div', $url, array('class' => 'reportlink'));
-    }
+if (has_capability('mod/customcertificate:manage', $context)) {
+    $numusers = count(customcertificate_get_issues($certificate->id, 'ci.timecreated ASC', $groupmode, $cm));
+    $url = html_writer::tag('a', get_string('viewcertificateviews', 'customcertificate', $numusers),
+        array('href' => $CFG->wwwroot . '/mod/customcertificate/report.php?id=' . $cm->id));
+    echo html_writer::tag('div', $url, array('class' => 'reportlink'));
+}
 
-    if (!empty($certificate->intro)) {
-        echo $OUTPUT->box(format_module_intro('customcertificate', $certificate, $cm->id), 'generalbox', 'intro');
-    }
+if (!empty($certificate->intro)) {
+    echo $OUTPUT->box(format_module_intro('customcertificate', $certificate, $cm->id), 'generalbox', 'intro');
+}
 
-    if ($attempts = $customcertificate->get_attempts()) {
-        echo $customcertificate->print_attempts($attempts);
-    }
-    
-    /*
-    if ($certificate->delivery == 0)    {
-        $str = get_string('openwindow', 'customcertificate');
-    } elseif ($certificate->delivery == 1)    {
-        $str = get_string('opendownload', 'customcertificate');
-    } elseif ($certificate->delivery == 2)    {
-        $str = get_string('openemail', 'customcertificate');
-    }
-    */
-
-    //echo html_writer::tag('p', $str, array('style' => 'text-align:center'));
-
-    $linkname = get_string('getcertificate', 'customcertificate');
-    // Add to log, only if we are reissuing
-    add_to_log($course->id, 'customcertificate', 'view', "view.php?id=$cm->id", $certificate->id, $cm->id);
-
-    //$issuecertificates = $DB->get_records('customcertificate_issues', array('certificateid' => $certificate->id));
-
-    //$issuecertificates = $DB->get_records('customcertificate_issues', array('certificateid' => $certificate->id, 'timedeleted' => null));
+if ($attempts = $customcertificate->get_attempts()) {
+    echo $customcertificate->print_attempts($attempts);
+}
 
 
-    /*$link = new moodle_url('/mod/customcertificate/view.php', array ('id' => $cm->id, 'action' => 'get'));
-    $button = new single_button($link, $linkname);
-    $button->add_action(new popup_action('click', $link, 'view'.$cm->id, array('height' => 600, 'width' => 800)));
-    */
+$linkname = get_string('getcertificate', 'customcertificate');
+// Add to log, only if we are reissuing
+add_to_log($course->id, 'customcertificate', 'view', "view.php?id=$cm->id", $certificate->id, $cm->id);
 
-    $linkpdf = $customcertificate->output_pdf($certrecord);
+$linkpdf = $customcertificate->output_pdf($certrecord);
 
-    echo '<a href="'.$linkpdf.'"" target="_blank">Get your certificate</a>';
-
-    //echo html_writer::tag('a', "Get the certificate", array('href' => $linkpdf, 'target' => '_blank'));
-
-	//echo html_writer::tag('div', $OUTPUT->render($button), array('style' => 'text-align:center'));
-	echo $OUTPUT->footer($course);
-	exit;
-/*} else { // Output to pdf
-    $customcertificate->output_pdf($certrecord);
-}*/
+echo '<a href="'.$linkpdf.'"" target="_blank">Get your certificate</a>';
+echo $OUTPUT->footer($course);
+exit;
 
 

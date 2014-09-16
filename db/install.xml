@@ -33,19 +33,13 @@
                 <FIELD NAME="certdate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="outcome" NEXT="certdatefmt"/>
                 <FIELD NAME="certdatefmt" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="certdate" NEXT="certgrade"/>
                 <FIELD NAME="certgrade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="certdatefmt" NEXT="gradefmt"/>
-                <FIELD NAME="gradefmt" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="certgrade" NEXT="emailfrom"/>
-                <FIELD NAME="emailfrom" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="gradefmt" NEXT="emailothers"/>
-                <FIELD NAME="emailothers" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="emailfrom" NEXT="emailteachers"/>
-                <FIELD NAME="emailteachers" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="emailothers" NEXT="addphoto"/>
-                <FIELD NAME="addphoto" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="emailteachers" NEXT="addphotox"/>
+                <FIELD NAME="gradefmt" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="certgrade" NEXT="addphoto"/>
+                <FIELD NAME="addphoto" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="gradefmt" NEXT="addphotox"/>
                 <FIELD NAME="addphotox" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="addphoto" NEXT="addphotoy"/>
                 <FIELD NAME="addphotoy" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="addphotox" NEXT="addphotowidth"/>
                 <FIELD NAME="addphotowidth" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="addphotoy" NEXT="addphotoheight"/>
-                <FIELD NAME="addphotoheight" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="addphotowidth" NEXT="savecert"/>
-                <FIELD NAME="savecert" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="userphotoheight" NEXT="reportcert"/>
-                <FIELD NAME="reportcert" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="savecert" NEXT="delivery"/>
-                <FIELD NAME="delivery" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="reportcert" NEXT="requiredtime"/>
-                <FIELD NAME="requiredtime" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="delivery"/>
+                <FIELD NAME="addphotoheight" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="10" SEQUENCE="false" PREVIOUS="addphotowidth" NEXT="requiredtime"/>
+                <FIELD NAME="requiredtime" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="addphotoheight"/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

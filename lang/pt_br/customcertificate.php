@@ -72,7 +72,6 @@ $string['addphotox'] = 'Posição Horizontal do foto del participação do certi
 $string['addphotoy'] = 'Posição Verticale do foto del participação do certificado';
 $string['addphotowidth'] = 'Ancho do foto del participação do certificado';
 $string['addphotoheight'] = 'Altura do foto del participação do certificado';
-$string['savecert'] = 'Salvar os certificados';
 $string['delivery'] = 'Envio';
 //Delivery options
 $string['openbrowser'] = 'Visualizar em uma nova janela';
@@ -142,7 +141,6 @@ $string['emailteachers_help'] = 'Quando habilitado, os professores recebem os em
 $string['emailothers_help'] = 'Digite os endereços de emails que vão receber o alerta de emissão de certificado.';
 $string['emailfrom_help'] = 'Nome a ser usado como remetente dos email enviados';
 $string['addphoto_help'] = 'Si elige esta opción, los estudiantes se ven obligados a subir su foto para obtener su certificado.';
-$string['savecert_help'] = 'Quando habilitado, uma cópia do certificado e salva nos arquivos do curso, dentro do sistema moodle um link para o certificado salvo aparcerá no relatório de certificados.';
 $string['delivery_help'] = 'Escolha como o certificado deve ser entregue aos alunos:
 Visualizar em uma nova janela: Abre uma nova janela no navegador do aluno contendo o certificado.
 Forçar o download: Abre uma janela de download de arquivo para o aluno salvar em seu computador.

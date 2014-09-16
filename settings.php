@@ -52,9 +52,6 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('customcertificate/addphotoheight', get_string('defaultaddphotoheight', 'customcertificate'),
         get_string('textposition_help', 'customcertificate'), 40, PARAM_INT));
 
-    $settings->add(new admin_setting_configcheckbox('customcertificate/savecert',
-        get_string('savecert', 'customcertificate'), get_string('savecert_help', 'customcertificate'), 1));
-
     $settings->add(new admin_setting_configselect('customcertificate/certdate', get_string('printdate', 'customcertificate'),
         get_string('printdate_help', 'customcertificate'), 2, customcertificate_get_date_options()));
 

@@ -58,8 +58,6 @@ if($zip->open('backup_customcertificate_'.$certificate->id.'.zip', ZipArchive::C
 
       echo $structure.'/'.$issuecertificate->userid.'.pdf';
    }
-   // Ajout d'un fichier
-   $zip->addFile('save.php');
 
      // Et on referme l'archive
    $zip->close();
@@ -69,56 +67,6 @@ else
 {
    echo 'Impossible d&#039;ouvrir &quot;Zip.zip<br/>';
 }
-
-
-
-/*
-foreach ($issuecertificates as $issuecertificate) 
-{
-   $fs = get_file_storage();
-
-   // Prepare file record object
-   $fileinfo = self::get_certificate_issue_fileinfo($issuecertificate->userid, $issuecertificate->id, $context->id);
-   $fileinfo['filename'] = clean_filename($certificate->name . '.pdf');;
-
-   // Check for file first
-   if (!$fs->file_exists($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename'])) {
-      $pdf=get_pdf($issuecertificate);
-      $fs->create_file_from_string($fileinfo, $pdf->Output('', 'S'));
-   }
-
-   $imagefileuser = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']));
-
-
-   $idCourse = "$this->course";
-   while(strlen($idCourse)<6)
-   {
-      $idCourse = '0'.$idCourse;
-   }
-   $idCode = $this->get_issue_uuid();
-   $racine = "./save";
-   if(!is_dir($racine)){
-      mkdir($racine, 0700);
-   }
-   $structure = "./".$racine."/".$idCourse;
-   if(!is_dir($structure)){
-      mkdir($structure, 0700);
-   }
-
-   $fullfilepath = $structure.'/'.$idCode.'.pdf';
-   $imagefileuser->copy_content_to($fullfilepath);
-
-   $zip->addFile($fullfilepath, $idCode.'.pdf');
-
-   foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($racine, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
-      $path->isDir() ? rmdir($path->getPathname()) : unlink($path->getPathname());
-   }
-   rmdir($racine);
-
-     //file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
-}
-*/
-
 
 echo 'Archive crée à récuperer <a href="'.$CFG->wwwroot.'/mod/customcertificate/backup_customcertificate_'.$certificate->id.'.zip">ici</a>';
 

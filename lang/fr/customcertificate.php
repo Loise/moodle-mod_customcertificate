@@ -78,7 +78,6 @@ $string['addphotox'] = 'Position horizontale de la photo de l\'utilisateur';
 $string['addphotoy'] = 'Position verticale de la photo de l\'utilisateur';
 $string['addphotowidth'] = 'Largeur de la photo de l\'utilisateur';
 $string['addphotoheight'] = 'Hauteur de la photo de l\'utilisateur';
-$string['savecert'] = 'Sauvez les certificats';
 $string['delivery'] = 'Emission';
 //Delivery options
 $string['openbrowser'] = 'Ouvrir dans une nouvelle fenêtre';
@@ -216,7 +215,6 @@ $string['emailothers_help'] = 'Entrez les adresses e-mail ici, séparés par une
 $string['emailfrom_help'] = 'Adresse secondaire de courriel';
 $string['addphoto_help'] = 'Si vous choisissez cette option, les étudiants sont forcés d\'uploader leur photo pour récupérer leur certificat.';
 $string['addphoto_help'] = 'Si vous choisissez cette option, les étudiants sont forcés d\'uploader leur photo pour récupérer leur certificat.';
-$string['savecert_help'] = 'Si vous choisissez cette option, une copie du fichier pdf du certificat de chaque utilisateur est enregistré dans le dossier moddata des fichiers de cours pour ce certificat. Un lien vers le certificat a été sauvegardé de chaque utilisateur sera affiché dans le rapport de certification.';
 $string['delivery_help'] = 'Choisissez ici la façon dont vous souhaitez que vos élèves obtienne leur certificat. Ouvrir dans une nouvelle fenêtre: Ouvre le certificat dans une nouvelle fenêtre du navigateur. Force le téléchargement: Ouvre la fenêtre de téléchargement du fichier du navigateur. Email: Cette option envoie le certificat à l\'étudiant en pièce jointe. Après que l\'utilisateur ai reçu son certificat, s\'il clique sur ​​le lien du certificat depuis la page d\'accueil du cours, il verra le jour il a reçu son certificat et sera en mesure d\'examiner le certificat reçu.';
 
 ////Form Sections

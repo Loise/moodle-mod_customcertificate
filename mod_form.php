@@ -152,47 +152,6 @@ class mod_customcertificate_mod_form extends moodleform_mod {
         $mform->setDefault('addphotoheight', get_config('customcertificate', 'addphotoheight'));
         $mform->setAdvanced('addphotoheight');
 
-        //-------------------------------Issue options----------------------------------
-
-        $mform->addElement('header', 'issueoptions', get_string('issueoptions', 'customcertificate'));
-
-        //Email to teachers ?
-        $mform->addElement('selectyesno', 'emailteachers', get_string('emailteachers', 'customcertificate'));
-        $mform->setDefault('emailteachers', 0);
-        $mform->addHelpButton('emailteachers', 'emailteachers', 'customcertificate');
-
-        //Email Others
-        $mform->addElement('text', 'emailothers', get_string('emailothers', 'customcertificate'), array('size'=>'40', 'maxsize'=>'200'));
-        $mform->setType('emailothers', PARAM_TEXT);
-        $mform->addHelpButton('emailothers', 'emailothers', 'customcertificate');
-
-        //Email From
-        $mform->addElement('text', 'emailfrom', get_string('emailfrom', 'customcertificate'), array('size'=>'40', 'maxsize'=>'200'));
-        $mform->setDefault('emailfrom', $CFG->supportname);
-        $mform->setType('emailfrom', PARAM_EMAIL);
-        $mform->addHelpButton('emailfrom', 'emailfrom', 'customcertificate');
-        $mform->setAdvanced('emailfrom');
-
-        //Delivery Options (Email, Download,...)
-        $deliveryoptions = array( 0 => get_string('openbrowser', 'customcertificate'), 1 => get_string('download', 'customcertificate'), 2 => get_string('emailcertificate', 'customcertificate'));
-        $mform->addElement('select', 'delivery', get_string('delivery', 'customcertificate'), $deliveryoptions);
-        $mform->setDefault('delivery', 0);
-        $mform->addHelpButton('delivery', 'delivery', 'customcertificate');
-
-        //Save Certificarte
-        $mform->addElement('selectyesno', 'savecert', get_string('savecert', 'customcertificate'));
-        $mform->setDefault('savecert', get_config('customcertificate', 'savecert'));
-        $mform->addHelpButton('savecert', 'savecert', 'customcertificate');
-
-        //Report Cert
-        //TODO acredito que seja para verificar o certificado pelo código, se for isto pode remover.
-        $reportfile = "$CFG->dirroot/customcertificates/index.php";
-        if (file_exists($reportfile)) {
-            $mform->addElement('selectyesno', 'reportcert', get_string('reportcert', 'customcertificate'));
-            $mform->setDefault('reportcert', 0);
-            $mform->addHelpButton('reportcert', 'reportcert', 'customcertificate');
-        }
-
         $this->standard_coursemodule_elements();
         $this->add_action_buttons();
     }
@@ -223,27 +182,5 @@ class mod_customcertificate_mod_form extends moodleform_mod {
 	    $data['introcertificatetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
             $data['secondpagetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
         }
-    }
-
-    /**
-     * Some basic validation
-     *
-     * @param $data
-     * @param $files
-     * @return array
-     */
-    public function validation($data, $files) {
-        $errors = parent::validation($data, $files);
-
-        /*
-
-        // Check that the required time entered is valid
-        if ((!is_number($data['requiredtime']) || $data['requiredtime'] < 0)) {
-            $errors['requiredtime'] = get_string('requiredtimenotvalid', 'customcertificate');
-        }
-        
-        */
-        
-        return $errors;
     }
 }

@@ -73,14 +73,8 @@ class customcertificate {
     public $coursename;
     public $certdate;
     public $certdatefmt;
-    public $emailfrom;
-    public $emailothers;
-    public $emailteachers;
     public $addphoto;
     public $userphoto;
-    public $savecert;
-    public $reportcert;
-    public $delivery;
     public $requiredtime;
     public $certgrade;
     public $gradefmt;
@@ -186,22 +180,12 @@ class customcertificate {
             $certissue->coursename = format_string($this->coursename, true);
             $certissue->timecreated = time();
             $certissue->code = $this->get_issue_uuid();
-            //$certissue->validationphoto = 0;
-            //$certissue->userphoto = false;
 
             if (!has_capability('mod/customcertificate:manage', $this->context)) {
                 $certissue->id = $DB->insert_record('customcertificate_issues', $certissue);
             } else {
                 $certissue->id = rand(0, 4);
-                //print_error("pas de sauvegarde dans la dbb");
             }
-
-            // Email to the teachers and anyone else
-            if ($this->emailteachers != 0)
-                $this->send_alert_email_teachers();
-
-            if (!empty($this->emailothers))
-                $this->send_alert_email_others();
         }
         return $certissue;
     }
@@ -434,69 +418,6 @@ class customcertificate {
         return $teachers;
     }
 
-    /**
-     * Alerts teachers by email of received certificates. First checks
-     * whether the option to email teachers is set for this certificate.
-     *
-     */
-    private function send_alert_email_teachers() {
-        if ($teachers = $this->get_teachers()) {
-            $emailteachers = array();
-            foreach ($teachers as $teacher) {
-                $emailteachers[] = $teacher->email;
-            }
-            $this->send_alert_emails($emailteachers);
-        }
-    }
-
-    /**
-     * Alerts others by email of received certificates. First checks
-     * whether the option to email others is set for this certificate.
-     * Uses the email_teachers info.
-     * Code suggested by Eloy Lafuente
-     *
-     */
-    private function send_alert_email_others() {
-        if ($this->emailothers) {
-            $others = explode(',', $this->emailothers);
-            if ($others)
-                $this->send_alert_emails($others);
-        }
-    }
-
-    private function send_alert_emails($emails) {
-        global $USER, $CFG, $DB;
-
-        if ($emails) {
-            $strawarded = get_string('awarded', 'customcertificate');
-            foreach ($emails as $email) {
-                $email = trim($email);
-                if (validate_email($email)) {
-                    $destination = new stdClass;
-                    $destination->email = $email;
-
-                    $info = new stdClass;
-                    $info->student = fullname($USER);
-                    $info->course = format_string($this->coursename, true);
-                    $info->certificate = format_string($this->name, true);
-                    $info->url = $CFG->wwwroot . '/mod/customcertificate/report.php?id=' . $this->cm->id;
-                    $from = $info->student;
-                    $postsubject = $strawarded . ': ' . $info->student . ' -> ' . $this->name;
-
-                    //Getting email body plain text
-                    $posttext = get_string('emailteachermail', 'customcertificate', $info) . "\n";
-
-                    //Getting email body html
-                    $posthtml = '<font face="sans-serif">';
-                    $posthtml .= '<p>' . get_string('emailteachermailhtml', 'customcertificate', $info) . '</p>';
-                    $posthtml .= '</font>';
-
-                    @email_to_user($destination, $from, $postsubject, $posttext, $posthtml);  // If it fails, oh well, too bad.
-                }
-            }
-        }
-    }
-
     private function create_pdf($issuecert) {
         global $DB, $USER, $CFG;
 
@@ -578,9 +499,6 @@ class customcertificate {
         $pdf->SetFontSize(8);
         $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $CFG->wwwroot.'/mod/customcertificate/verify.php'), 0, 0, 0, true, 'L');
 
-        
-        //file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
-
         $pdf->Output($structure.'/'.$issuecert->userid.'.pdf', 'F');
 
         if(is_file($fullfilepath))
@@ -604,7 +522,6 @@ class customcertificate {
 
         @remove_dir($temp_manager->path);
 
-        //return $pdf;
         return $structure.'/'.$issuecert->userid.'.pdf';
     }
 
@@ -639,26 +556,6 @@ class customcertificate {
         if (!$fs->file_exists($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename'])) {
             $fs->create_file_from_string($fileinfo, $pdf->Output('', 'S'));
         }
-
-        /*
-        //Test creation file Loise
-        // Make id course and id user on 6 digits and idcertif on 4 digits
-        $idCourse = "$this->course";
-        while(strlen($idCourse)<6)
-        {
-            $idCourse = '0'.$idCourse;
-        }
-        $idCode = $this->get_issue_uuid();
-        $racine = "./save";
-        if(!is_dir($racine)){
-            mkdir($racine, 0700);
-        }
-        $structure = "./".$racine."/".$idCourse;
-        if(!is_dir($structure)){
-            mkdir($structure, 0700);
-        }
-        file_put_contents($structure.'/'.$idCode.'.pdf', $pdf->Output('', 'S'));
-        */
 
         return true;
     }
@@ -755,30 +652,6 @@ class customcertificate {
     public function output_pdf($issuecert) {
         $linkpdf = $this->create_pdf($issuecert);
         return $linkpdf;
-        /*
-        $filename = clean_filename($this->name . '.pdf');
-
-        if ($this->savecert == 1) {
-            // PDF contents are now in $file_contents as a string
-            $this->save_pdf($pdf, $filename, $issuecert->id);
-            //        $file_contents = $pdf->Output('', 'S');
-            //        certificate_save_pdf($file_contents, $certrecord->id, $filename, $context->id);
-        }
-
-        switch ($this->delivery) {
-            case self::OUTPUT_OPEN_IN_BROWSER :
-                $pdf->Output($filename, 'I'); // open in browser
-                break;
-            case self::OUTPUT_FORCE_DOWNLOAD :
-                $pdf->Output($filename, 'D');
-                break;
-            case self::OUTPUT_SEND_EMAIL :
-                $this->send_certificade_email($issuecert);
-                $pdf->Output($filename, 'I'); // open in browser
-                $pdf->Output('', 'S'); // send
-                break;
-        }*/
-
     }
 
     public function get_pdf($issuecert)
@@ -869,11 +742,6 @@ class customcertificate {
     private function get_date($certissue, $userid = null) {
         global $DB, $USER;
 
-/*        if ($this->certdate <= 0) 
-        {
-            return '';
-        }*/
-
         if (empty($userid)) 
         {
             $userid = $USER->id;
@@ -882,37 +750,19 @@ class customcertificate {
         // Set certificate date to current time, can be overwritten later
         $date = 0;//$certissue->timecreated;
 
-       /* if ($this->certdate == '2') 
-        {*/
-            // Get the enrolment end date
-            $sql = "SELECT MAX(c.timecompleted) as timecompleted
-                    FROM {course_completions} c
-                    WHERE c.userid = :userid
-                    AND c.course = :courseid";
-            if ($timecompleted = $DB->get_record_sql($sql, array('userid' => $userid, 'courseid' => $this->course))) 
-            {
-                if (!empty($timecompleted->timecompleted)) 
-                {
-                    $date = $timecompleted->timecompleted;
-                }
-            }
-       /* } 
-        else if ($this->certdate > 2) 
+        // Get the enrolment end date
+        $sql = "SELECT MAX(c.timecompleted) as timecompleted
+                FROM {course_completions} c
+                WHERE c.userid = :userid
+                AND c.course = :courseid";
+        if ($timecompleted = $DB->get_record_sql($sql, array('userid' => $userid, 'courseid' => $this->course))) 
         {
-            if ($modinfo = $this->get_mod_grade($this->certdate, $userid)) 
+            if (!empty($timecompleted->timecompleted)) 
             {
-                $date = $modinfo->dategraded;
+                $date = $timecompleted->timecompleted;
             }
         }
-        
-        if (empty($this->certdatefmt))
-        {*/
-            $format = get_string('strftimedate', 'langconfig');
-        /*} 
-        else 
-        {
-            $format = $this->certdatefmt;
-        }*/
+       $format = get_string('strftimedate', 'langconfig');
             
         return userdate($date, $format);
     }

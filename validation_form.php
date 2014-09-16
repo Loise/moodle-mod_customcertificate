@@ -55,18 +55,6 @@ class validation_form extends moodleform {
         $this->add_action_buttons();
     }
 
-    /**
-     * Prepares the form before data are set
-     *
-     * Additional wysiwyg editor are prepared here, the introeditor is prepared automatically by core.
-     * Grade items are set here because the core modedit supports single grade item only.
-     *
-     * @param array $data to be set
-     * @return void
-     */
-    public function data_preprocessing(&$data) {
-    }
-
     //Custom validation should be added here
     function validation($data, $files) {
         $errors = parent::validation($data, $files);
