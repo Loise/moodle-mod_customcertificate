@@ -21,9 +21,9 @@ $PAGE->set_pagelayout('base');
 
 $coursenode = $PAGE->settingsnav->add(get_string('pluginadministration', 'customcertificate'));
 if ($coursenode) {
-    $coursenode->add('Validation pictures of students', './validation.php?id='.$id)->make_active();
-    $coursenode->add('Verification of certificate', './verify.php')->make_active();
-    $coursenode->add('Archive', './save.php?id='.$id)->make_active();
+    $coursenode->add(get_string('validationlink', 'customcertificate'), './validation.php?id='.$id)->make_active();
+    $coursenode->add(get_string('verificationlink', 'customcertificate'), './verify.php')->make_active();
+    $coursenode->add(get_string('archivelink', 'customcertificate'), './save.php?id='.$id)->make_active();
 }
 
 if (!$cm = get_coursemodule_from_id('customcertificate', $id)) {
@@ -37,7 +37,7 @@ if (!$certificate = $DB->get_record('customcertificate', array('id'=> $cm->insta
 $issuecertificates = $DB->get_records('customcertificate_issues', array('certificateid' => $certificate->id, 'timedeleted' => null));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
+echo $OUTPUT->heading(get_string('savecertificate', 'customcertificate'));
 
 $zip = new ZipArchive(); 
 
@@ -55,20 +55,18 @@ if($zip->open('backup_customcertificate_'.$certificate->id.'.zip', ZipArchive::C
       $structure = $racine."/".$idCourse;
 
       $zip->addFile($structure.'/'.$issuecertificate->userid.'.pdf', $idCode.'.pdf');
-
-      echo $structure.'/'.$issuecertificate->userid.'.pdf';
    }
 
      // Et on referme l'archive
    $zip->close();
-   echo 'Archive terminée<br/>';
+   echo get_string('archivefinished', 'customcertificate').'<a href="'.$CFG->wwwroot.'/mod/customcertificate/backup_customcertificate_'.$certificate->id.'.zip">'.get_string('link', 'customcertificate').'</a>';
+
 }
 else
 {
-   echo 'Impossible d&#039;ouvrir &quot;Zip.zip<br/>';
+   echo get_string('archiveerror', 'customcertificate');
 }
 
-echo 'Archive crée à récuperer <a href="'.$CFG->wwwroot.'/mod/customcertificate/backup_customcertificate_'.$certificate->id.'.zip">ici</a>';
 
 echo $OUTPUT->footer();
 

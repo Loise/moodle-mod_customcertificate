@@ -24,9 +24,6 @@ $string['receiveddate'] = 'Date de réception';
 $string['grade'] = 'Note';
 $string['code'] = 'Code';
 $string['report'] = 'Signaler';
-$string['opendownload'] = 'Cliquez sur le bouton ci-dessous pour enregistrer votre certificat sur votre ordinateur.';
-$string['openemail'] = 'Cliquez sur le bouton ci-dessous et votre certificat vous sera envoyé par email en tant que pièce jointe.';
-$string['openwindow'] = 'Cliquez sur le bouton ci-dessous pour ouvrir votre certificat dans une nouvelle fenêtre du navigateur.';
 $string['hours'] = 'heures';
 $string['keywords'] = 'cetificat, cours, pdf, moodle';
 $string['pluginadministration'] = 'Administration de certificat';
@@ -70,19 +67,11 @@ $string['gradeletter'] = 'Note en lettre';
 $string['gradepercent'] = 'Note en pourcentage';
 $string['gradepoints'] = 'Note en point';
 $string['coursetimereq'] = 'Minutes éxigées dans ce cours';
-$string['emailteachers'] = 'Courriels des professeurs';
-$string['emailothers'] = 'Autres adresses courriel';
-$string['emailfrom'] = 'Adresse de courriel';
 $string['addphoto'] = 'Ajouter une photo au certificat';
 $string['addphotox'] = 'Position horizontale de la photo de l\'utilisateur';
 $string['addphotoy'] = 'Position verticale de la photo de l\'utilisateur';
 $string['addphotowidth'] = 'Largeur de la photo de l\'utilisateur';
 $string['addphotoheight'] = 'Hauteur de la photo de l\'utilisateur';
-$string['delivery'] = 'Emission';
-//Delivery options
-$string['openbrowser'] = 'Ouvrir dans une nouvelle fenêtre';
-$string['download'] = 'Forcer le téléchargement';
-$string['emailcertificate'] = 'Email (Vous devez aussi choisir de sauvegarder)';
 
 
 
@@ -215,27 +204,6 @@ $string['emailothers_help'] = 'Entrez les adresses e-mail ici, séparés par une
 $string['emailfrom_help'] = 'Adresse secondaire de courriel';
 $string['addphoto_help'] = 'Si vous choisissez cette option, les étudiants sont forcés d\'uploader leur photo pour récupérer leur certificat.';
 $string['addphoto_help'] = 'Si vous choisissez cette option, les étudiants sont forcés d\'uploader leur photo pour récupérer leur certificat.';
-$string['delivery_help'] = 'Choisissez ici la façon dont vous souhaitez que vos élèves obtienne leur certificat. Ouvrir dans une nouvelle fenêtre: Ouvre le certificat dans une nouvelle fenêtre du navigateur. Force le téléchargement: Ouvre la fenêtre de téléchargement du fichier du navigateur. Email: Cette option envoie le certificat à l\'étudiant en pièce jointe. Après que l\'utilisateur ai reçu son certificat, s\'il clique sur ​​le lien du certificat depuis la page d\'accueil du cours, il verra le jour il a reçu son certificat et sera en mesure d\'examiner le certificat reçu.';
-
-////Form Sections
-$string['issueoptions'] = 'Les options de délivrance';
-$string['designoptions'] = 'Options de design';
-
-//Emails text
-$string['emailstudenttext'] = 'Voir le certificat joint : {$a->course}.';
-$string['emailteachermail'] = '{$a->student} a reçu son certificat: \'{$a->certificate}\'
-pour le cours "{$a->course}".
-
-Vous pouvez le voir ici :
-
-    {$a->url}';
-
-$string['emailteachermailhtml'] = '{$a->student} a reçu son certificat: \'<i>{$a->certificate}</i>\'
-pour le cours "{$a->course}".
-
-Vous pouvez le voir ici :
-
-    <a href="{$a->url}">Certificat</a>.';
 
 
 
@@ -255,6 +223,8 @@ $string['defaultaddphotoy'] = 'Position verticale de la photo de l\'utilisateur 
 $string['defaultaddphotowidth'] = 'Largeur de la photo de l\'utilisateur';
 $string['defaultaddphotoheight'] = 'Hauteur de la photo de l\'utilisateur';
 
+$string['link'] = 'ce lien';
+
 //Erros
 $string['filenotfound'] = 'Fichier non trouvé : {$a}';
 $string['invalidcode'] = 'Code de certificat invalide';
@@ -263,6 +233,36 @@ $string['cantdeleteissue'] = 'Erreur de suppression de certificats délivrés';
 
 //Verify certificate page
 $string['certificateverification'] = 'Verification des certificats';
+
+//Adding photo certificate page
+$string['certificateaddphoto'] = 'Ajouter votre photo d\'identité';
+$string['unknowchar'] = 'Le nom de votre fichier contient des caractères spéciaux, merci de corriger et de réessayer.';
+$string['emailvalidationphotosubject'] = '[Moodle] Une photo d\'utilisateur à besoin d\'être validé !';
+$string['emailvalidationphotolink'] = 'Vous pouvez valider les photos des utilisateurs par ce lien : ';
+$string['emailvalidationphotolinkhtml'] = 'Vous pouvez valider les photos des utilisateurs par ';
+
+//Pending certificate page
+$string['pendingcertificate'] = 'En attente de validation';
+$string['pending'] = 'Votre photo est en cours de validation, merci de patienter.';
+
+//Save certificate page
+$string['savecertificate'] = 'Obtenir une archive';
+$string['archivefinished'] = 'L\'archive est complété, pour pouvez l\'obtenir par ';
+$string['archiveerror'] = 'Une erreur est servenue à la création de l\'archive, merci de réessayer plus tard';
+
+//Validation certificate page
+$string['validationcertificate'] = 'Validation des photos d\'étudiants';
+$string['emailvalidatedphotosubject'] = '[Moodle] Votre photo est validée !';
+$string['emailvalidatedphotolink'] = 'Vous pouvez récuperer votre certificat par ce lien : ';
+$string['emailvalidatedphotolink'] = 'Vous pouvez récuperer votre certificat par ';
+$string['refresh'] = 'Rafraichissez la page si vous souhaiter valider d\'autres photos.';
+$string['photovalidated'] = 'Ces photos ont été validées :';
+$string['permissiondenied'] = 'Vous n\'avez pas la permission pour accéder à cette page.';
+
+//Menu
+$string['validationlink'] = 'Validation des photos d\'étudiants';
+$string['verificationlink'] = 'Verification des certificats';
+$string['archivelink'] = 'Archive';
 
 //Settings
 $string['certlifetime'] = 'Gardez les certificats délivrés pendant : (en mois)';

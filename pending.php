@@ -19,8 +19,8 @@ $PAGE->set_url('/mod/customcertificate/pending.php', array('id' => $id));
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('base');
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
-echo html_writer::tag('p', "Your picture is being validated, please wait.", array('style' => 'text-align:center'));
+echo $OUTPUT->heading(get_string('pendingcertificate', 'customcertificate'));
+echo html_writer::tag('p', get_string('pending', 'customcertificate'), array('style' => 'text-align:center'));
 
 
 if(!$issueuserphoto = $DB->get_record('customcertificate_userphoto', array('userid' => $USER->id, 'certificateid' => $id)))

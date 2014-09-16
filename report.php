@@ -71,9 +71,9 @@ if (!$download) {
     $PAGE->set_heading($course->fullname);
     $coursenode = $PAGE->settingsnav->get('modulesettings');
     if ($coursenode) {
-        $coursenode->add('Validation pictures of students', './validation.php?id='.$cm->id)->make_active();
-        $coursenode->add('Verification of certificate', './verify.php')->make_active();
-        $coursenode->add('Archive', './save.php?id='.$cm->id)->make_active();
+        $coursenode->add(get_string('validationlink', 'customcertificate'), './validation.php?id='.$cm->id)->make_active();
+        $coursenode->add(get_string('verificationlink', 'customcertificate'), './verify.php')->make_active();
+        $coursenode->add(get_string('archivelink', 'customcertificate'), './save.php?id='.$cm->id)->make_active();
     }
     // Check to see if groups are being used in this choice
     if ($groupmode = groups_get_activity_groupmode($cm)) {
@@ -85,7 +85,7 @@ if (!$download) {
     $page = $perpage = 0;
 }
 
-add_to_log($course->id, 'customcertificate', 'view', "report.php?id=$cm->id", '$certificate->id', $cm->id);
+add_to_log($course->id, 'customcertificate', 'view report', "report.php?id=$cm->id", '$certificate->id', $cm->id);
 
 // Ensure there are issues to display, if not display notice
 if (!$users = customcertificate_get_issues($certificate->id, $DB->sql_fullname(), $groupmode, $cm, $page, $perpage)) {

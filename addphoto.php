@@ -27,14 +27,14 @@ $mform = new addphoto_form($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id
 
 if (!$data = $mform->get_data()) {
     echo $OUTPUT->header();
-    echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
+    echo $OUTPUT->heading(get_string('certificateaddphoto', 'customcertificate'));
     if($retry == 1)
     {
-        echo html_writer::tag('p', "The name of your file contains special characters, thank you to fix that and try again.", array('style' => 'text-align:center'));
+        echo html_writer::tag('p', get_string('unknowchar', 'customcertificate'), array('style' => 'text-align:center'));
         $retry = 0;
     }
     $mform->display();
-    add_to_log($context->instanceid, 'customcertificate', 'verify', 'addphoto.php?id='.$id);
+    add_to_log($context->instanceid, 'customcertificate', 'addphoto', 'addphoto.php?id='.$id);
     $mform->set_data(array('id'=>$id));
     echo $OUTPUT->footer();
 } else {
@@ -89,7 +89,7 @@ if (!$data = $mform->get_data()) {
             $context = get_context_instance(CONTEXT_COURSE, $certificate->course);
             $teachers = get_role_users($role->id, $context);
             foreach ($teachers as $teacher) {
-                email_to_user($teacher, format_string($teacher->email, true), "[Moodle] A user need a validation of photo !", "You can validation the users photos here : ".$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$cm->id, '<font face="sans-serif"><p>You can validation the users photos <a href="'.$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$cm->id.'">link</a></p></font>');
+                email_to_user($teacher, format_string($teacher->email, true), get_string('emailvalidationphotosubject','customcertificate'), get_string('emailvalidationphotolink','customcertificate').$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$cm->id, '<font face="sans-serif"><p>'.get_string('emailvalidationphotolinkhtml','customcertificate').'<a href="'.$CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$cm->id.'">'.get_string('link','customcertificate').'</a></p></font>');
             }
             
             redirect($CFG->wwwroot.'/mod/customcertificate/pending.php?id=' . $id); 

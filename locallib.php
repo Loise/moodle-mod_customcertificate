@@ -560,57 +560,6 @@ class customcertificate {
         return true;
     }
 
-    /**
-     * Sends the student their issued certificate from moddata as an email
-     * attachment.
-     *
-     * @param stdClass $course
-     * @param stdClass $certificate
-     * @param stdClass $certrecord
-     * @param stdClass $context
-     */
-    private function send_certificade_email($issuecert) {
-        global $USER;
-
-        $info = new stdClass;
-        $info->username = $issuecert->username;
-        $info->certificate = format_string($this->name, true);
-        $info->course = $issuecert->coursename;
-
-        $subject = $info->course . ': ' . $info->certificate;
-        $message = get_string('emailstudenttext', 'customcertificate', $info) . "\n";
-
-        // Make the HTML version more XHTML happy  (&amp;)
-        $messagehtml = text_to_html($message);
-
-        $filename = clean_filename($this->name . '.pdf');
-
-        if (has_capability('mod/customcertificate:manage', $this->context))
-            $this->save_pdf($this->create_pdf($issuecert), $filename, $issuecert->id);
-
-        // Get generated certificate file
-        $fs = get_file_storage();
-        $fileinfo = self::get_certificate_issue_fileinfo($USER->id, $issuecert->id, $this->context->id);
-        $file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $filename);
-
-
-        if ($file) { //put in a tmp dir, for e-mail attachament
-            $temp_manager = $this->move_temp_dir($file);
-        } else {
-            print_error(get_string('filenotfound', 'customcertificate', $filename));
-        }
-
-        $attachment = $temp_manager->relativefilepath;
-        $attachname = $filename;
-        $ret = email_to_user($USER, format_string($this->emailfrom, true), $subject, $message, $messagehtml, $attachment, $attachname);
-
-        @remove_dir($temp_manager->path);
-
-        if (has_capability('mod/customcertificate:manage', $this->context))
-            $file->delete();
-
-        return $ret;
-    }
 
     /**
      * Get the time the user has spent in the course

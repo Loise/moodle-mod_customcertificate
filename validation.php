@@ -22,15 +22,15 @@ $PAGE->set_pagelayout('base');
 
 $coursenode = $PAGE->settingsnav->add(get_string('pluginadministration', 'customcertificate'));
 if ($coursenode) {
-    $coursenode->add('Validation pictures of students', './validation.php?id='.$id)->make_active();
-    $coursenode->add('Verification of certificate', './verify.php')->make_active();
-    $coursenode->add('Archive', './save.php?id='.$id)->make_active();
+    $coursenode->add(get_string('validationlink', 'customcertificate'), './validation.php?id='.$id)->make_active();
+    $coursenode->add(get_string('verificationlink', 'customcertificate'), './verify.php')->make_active();
+    $coursenode->add(get_string('archivelink', 'customcertificate'), './save.php?id='.$id)->make_active();
 }
 
 $mform = new validation_form($CFG->wwwroot.'/mod/customcertificate/validation.php?id='.$id);
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('certificateverification', 'customcertificate'));
+echo $OUTPUT->heading(get_string('validationcertificate', 'customcertificate'));
 
 if (!$data = $mform->get_data()) {
    if (has_capability('mod/customcertificate:manage', $context)) {
@@ -38,7 +38,7 @@ if (!$data = $mform->get_data()) {
       add_to_log($context->instanceid, 'customcertificate', 'verify', 'validation.php?id='.$id);
       $mform->set_data(array('id'=>$id));
    }else {
-      print_error('You don\'t have the permission for access at this page');
+      print_error(get_string('permissiondenied', 'customcertificate'));
    }
 }
 else
@@ -53,18 +53,17 @@ else
 
    $groupmode = groups_get_activity_groupmode($cm);
    $users = customcertificate_get_userphoto($certificate->id, $groupmode, $cm);
+   echo get_string('photovalidated', 'customcertificate');
    foreach ($users as $user) {
       $check = 'validationphoto'.$user->id;
       if(isset($data->{$check}))
       {
-        echo html_writer::tag('p', 'the photo of the student '.$user->firstname.' '.$user->lastname.' have been valited.', array('style' => 'text-align:center'));
+        echo html_writer::tag('p', $user->firstname.' '.$user->lastname, array('style' => 'text-align:center'));
         $DB->set_field('customcertificate_userphoto', 'validationphoto', "validated", array('userid' => $user->id, 'certificateid' => $certificate->id));
-        email_to_user($user, format_string($user->email, true), "[Moodle] Your photo is validated !", "You can get your certificate at this link : ".$CFG->wwwroot.'/mod/customcertificate/view.php?id='.$id, '<font face="sans-serif"><p>You can get your certificate at this <a href="'.$CFG->wwwroot.'/mod/customcertificate/view.php?id='.$id.'">link</a></p></font>');
+        email_to_user($user, format_string($user->email, true), get_string('emailvalidatedphotosubject', 'customcertificate'), get_string('emailvalidatedphotolink', 'customcertificate').$CFG->wwwroot.'/mod/customcertificate/view.php?id='.$id, '<font face="sans-serif"><p> '.get_string('emailvalidatedphotolink', 'customcertificate').'<a href="'.$CFG->wwwroot.'/mod/customcertificate/view.php?id='.$id.'">'.get_string('link', 'customcertificate').'</a></p></font>');
       }
    }
-
-   echo html_writer::tag('p', 'Please refresh the page for anoher validation.', array('style' => 'text-align:center'));
-
+   echo html_writer::tag('p', get_string('refresh', 'customcertificate'), array('style' => 'text-align:center'));
 }
 
 echo $OUTPUT->footer();

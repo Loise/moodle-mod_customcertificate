@@ -24,9 +24,6 @@ $string['receiveddate'] = 'Date Received';
 $string['grade'] = 'Grade';
 $string['code'] = 'Code';
 $string['report'] = 'Report';
-$string['opendownload'] = 'Click the button below to save your certificate to your computer.';
-$string['openemail'] = 'Click the button below and your certificate will be sent to you as an email attachment.';
-$string['openwindow'] = 'Click the button below to open your certificate in a new browser window.';
 $string['hours'] = 'hours';
 $string['keywords'] = 'certificate, course, pdf, moodle';
 $string['pluginadministration'] = 'Certificate administration';
@@ -75,11 +72,6 @@ $string['addphotox'] = 'User photo Horizontal Position';
 $string['addphotoy'] = 'User photo Vertical Position';
 $string['addphotowidth'] = 'User photo width';
 $string['addphotoheight'] = 'User photo height';
-$string['delivery'] = 'Delivery';
-//Delivery options
-$string['openbrowser'] = 'Open in new window';
-$string['download'] = 'Force download';
-$string['emailcertificate'] = 'Email (Must also choose save!)';
 
 
 
@@ -140,34 +132,8 @@ Letter Grade: Prints the percentage grade as a letter.';
 
 $string['coursetimereq_help'] = 'Enter here the minimum amount of time, in minutes, that a student must be logged into the course before they will be able to receive the certificate.';
 $string['addphoto_help'] = 'If you choose this option, students are forced to upload their photo to get their certificate.';
-$string['delivery_help'] = 'Choose here how you would like your students to get their certificate.
-Open in Browser: Opens the certificate in a new browser window.
-Force Download: Opens the browser file download window.
-Email Certificate: Choosing this option sends the certificate to the student as an email attachment.
-After a user receives their certificate, if they click on the certificate link from the course homepage, they will see the date they received their certificate and will be able to review their received certificate.';
 
-////Form Sections
-$string['issueoptions'] = 'Issue Options';
 $string['designoptions'] = 'Design Options';
-
-//Emails text
-$string['emailstudenttext'] = 'Attached is your certificate for {$a->course}.';
-$string['emailteachermail'] = '
-{$a->student} has received their certificate: \'{$a->certificate}\'
-for {$a->course}.
-
-You can review it here:
-
-    {$a->url}';
-
-$string['emailteachermailhtml'] = '
-{$a->student} has received their certificate: \'<i>{$a->certificate}</i>\'
-for {$a->course}.
-
-You can review it here:
-
-    <a href="{$a->url}">Certificate Report</a>.';
-
 
 
 //Admin settings page
@@ -185,6 +151,8 @@ $string['defaultaddphotoy'] = 'Default Vertical User Photo Position';
 $string['defaultaddphotowidth'] = 'Default User photo width';
 $string['defaultaddphotoheight'] = 'Default User photo height';
 
+$string['link'] = 'this link';
+
 //Erros
 $string['filenotfound'] = 'File not Found: {$a}';
 $string['invalidcode'] = 'Invalid certificate code';
@@ -194,6 +162,36 @@ $string['cantdeleteissue'] = 'Error removing issued certificates';
 //Verify certificate page
 $string['certificateverification'] = 'Certificate Verification';
 
+//Adding photo certificate page
+$string['certificateaddphoto'] = 'Add your identify photo';
+$string['unknowchar'] = 'The name of your file contains special characters, thank you to fix that and try again.';
+$string['emailvalidationphotosubject'] = '[Moodle] A user need a validation of photo !';
+$string['emailvalidationphotolink'] = 'You can validate the users photos here : ';
+$string['emailvalidationphotolinkhtml'] = 'You can validate the users photos at ';
+
+//Pending certificate page
+$string['pendingcertificate'] = 'Pending the validation';
+$string['pending'] = 'Your picture is being validated, please wait.';
+
+//Save certificate page
+$string['savecertificate'] = 'Get an archive';
+$string['archivefinished'] = 'The archive is completed, you can get it at ';
+$string['archiveerror'] = 'There are an error in the creation of the archive, please retry antoher time';
+
+//Validation certificate page
+$string['validationcertificate'] = 'Validation of user\'s photo';
+$string['emailvalidatedphotosubject'] = '[Moodle] Your photo is validated !';
+$string['emailvalidatedphotolink'] = 'You can get your certificate at this link: ';
+$string['emailvalidatedphotolink'] = 'You can get your certificate at ';
+$string['refresh'] = 'Please refresh the page for anoher validation.';
+$string['photovalidated'] = 'These photo are validated: ';
+$string['permissiondenied'] = 'You don\'t have the permission for access at this page.';
+
+//Menu
+$string['validationlink'] = 'Validation pictures of students';
+$string['verificationlink'] = 'Verification of certificate';
+$string['archivelink'] = 'Archive';
+
 //Settings
 $string['certlifetime'] = 'Keep issued certificates for: (in Months)';
 $string['certlifetime_help'] = 'This specifies the length of time you want to keep issued certificates. Issed certificates that are older than this age are automatically deleted.';
@@ -202,6 +200,7 @@ $string['neverdeleteoption'] = 'Never delete';
 $string['variablesoptions'] = 'Others Options';
 $string['getcertificate'] = 'Get Certificate';
 $string['verifycertificate'] = 'Verify Certificate';
+
 
 
 $string['customcertificate'] = 'Verification for custom certificate code';
