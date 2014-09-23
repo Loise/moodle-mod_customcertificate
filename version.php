@@ -5,8 +5,8 @@
  *
  * @package    mod
  * @subpackage customcertificate
- * @copyright  Carlos Fonseca <carlos.alexandre@outlook.com>, Mark Nelson <mark@moodle.com.au>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or late
+ * @copyright  W3DevCampus/W3C <training@w3.org>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $module->version  = 2013070501; // The current module version (Date: YYYYMMDDXX)

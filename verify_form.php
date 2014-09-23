@@ -8,7 +8,10 @@ require_once($CFG->dirroot.'/lib/formslib.php');
 
 class verify_form extends moodleform {
 
-    // Define the form
+    /**
+     * Prepares creating the form with the addition of fields
+     * @return void
+     */
     function definition () {
         global $CFG;
 
@@ -27,6 +30,7 @@ class verify_form extends moodleform {
         $this->add_action_buttons(false, get_string('getcertificate','customcertificate'));
     }
 
+    //Custom validation should be added here
     function validation($data, $files) {
         $errors = parent::validation($data, $files);
         if ($this->is_recaptcha_enabled()) {
@@ -44,6 +48,10 @@ class verify_form extends moodleform {
         return $errors;
     }
 
+    /**
+     * Verify if the recaptcha is enabled
+     * @return bool
+     */
     function is_recaptcha_enabled() {
         global $CFG;
         return (!empty($CFG->recaptchapublickey) && !empty($CFG->recaptchaprivatekey));

@@ -1,26 +1,10 @@
 <?php
-
-// This file is part of Certificate module for Moodle - http://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Custom Certificate module core interaction API
  *
  * @package    mod
  * @subpackage customcertificate
- * @copyright  Carlos Alexandre Fonseca <carlos.alexandre@outlook.com>
+ * @copyright  W3DevCampus/W3C <training@w3.org>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once($CFG->dirroot . '/mod/customcertificate/lib.php');
@@ -84,7 +68,6 @@ class customcertificate {
     private $orientation = '';
     private $cm;
 
-
     public function __construct(stdclass $dbrecord, stdclass $context = null) {
         global $DB;
 
@@ -119,6 +102,12 @@ class customcertificate {
         }
     }
 
+    /**
+     * Get the file info of certificate image
+     *
+     * @param $context as context of certificate
+     * @return void
+     */
     public static function get_certificate_image_fileinfo($context) {
         if (is_object($context)) {
             $contextid = $context->id;
@@ -136,6 +125,14 @@ class customcertificate {
         return $fileinfo;
     }
 
+    /**
+     * Get the file info of certificate issue
+     *
+     * @param $userid as id of user
+     * @param $issueid as id of certificate issue
+     * @param $context as context of certificate
+     * @return void
+     */
     public static function get_certificate_issue_fileinfo($userid, $issueid, $context) {
 
         if (is_object($context)) {
@@ -159,13 +156,9 @@ class customcertificate {
     }
 
     /**
-     * Inserts preliminary user data when a certificate is viewed.
-     * Prevents form from issuing a certificate upon browser refresh.
+     * Get the certificate issue of a user
      *
-     * @param stdClass $course
-     * @param stdClass $user
-     * @param stdClass $certificate
-     * @param stdClass $cm
+     * @param stdClass $user as the user
      * @return stdClass the newly created certificate issue
      */
     function get_issue($user) {
@@ -190,6 +183,12 @@ class customcertificate {
         return $certissue;
     }
 
+    /**
+     * Get the user's photo
+     *
+     * @param stdClass $user as the user
+     * @return void
+     */
     function get_user_photo($user) {
         global $DB;
         if(!$userphoto = $DB->get_record('customcertificate_userphoto', array('userid' => $user->id, 'certificateid' => $this->id)))
@@ -235,7 +234,7 @@ class customcertificate {
     public function print_attempts($attempts) {
         global $OUTPUT, $DB;
 
-        echo $OUTPUT->heading(get_string('summaryofattempts', 'customcertificate'));
+        echo $OUTPUT->heading(get_string('summaryofpreviouscertificate', 'customcertificate'));
 
         // Prepare table header
         $table = new html_table();
@@ -418,6 +417,12 @@ class customcertificate {
         return $teachers;
     }
 
+    /**
+     * Create the pdf
+     *
+     * @param $issuecert as the certificate issue of a user
+     * @return void
+     */
     private function create_pdf($issuecert) {
         global $DB, $USER, $CFG;
 
@@ -598,17 +603,36 @@ class customcertificate {
         return 0;
     }
 
+    /**
+     * Get the link of the certificate issue
+     *
+     * @param $issuecert as the certificate issue of a user
+     * @return string as the link of pdf
+     */
     public function output_pdf($issuecert) {
         $linkpdf = $this->create_pdf($issuecert);
         return $linkpdf;
     }
 
+    /**
+     * Get the pdf of the certificate issue
+     *
+     * @param $issuecert as the certificate issue of a user
+     * @return TCPDF as the pdf
+     */
     public function get_pdf($issuecert)
     {
         $pdf = $this->create_pdf($issuecert);
         return $pdf;
     }
 
+     /**
+     * Get the pdf of the certificate issue
+     *
+     * @param $certissue as the certificate issue of a user
+     * @param $string as the string search in the file language
+     * @return string as text corresponding at $string param
+     */
     private function get_certificate_text($certissue, $string) {
         global $USER, $DB;
 
@@ -770,6 +794,12 @@ class customcertificate {
         return '';
     }
 
+    /**
+     * Move a file at a temporary directory
+     *
+     * @param $file as the file to move
+     * @return stdClass with the path of this file
+     */
     private function move_temp_dir($file) {
         global $CFG;
 
@@ -800,6 +830,12 @@ class customcertificate {
         return $obj;
     }
 
+    /**
+     * Get the differents fields of a user profile
+     *
+     * @param $userid as the id of a user
+     * @return stdClass contains the fields of user
+     */
     private function get_user_profile_fields($userid) {
         global $CFG, $DB;
 

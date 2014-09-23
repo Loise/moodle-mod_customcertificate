@@ -7,6 +7,11 @@ require_once($CFG->dirroot.'/lib/formslib.php');
 
 
 class addphoto_form extends moodleform {
+    /**
+     * Prepares creating the form with the addition of fields such as using a FilePicker
+     *
+     * @return void
+     */
     public function definition() {
         global $CFG, $COURSE;
 
@@ -22,7 +27,7 @@ class addphoto_form extends moodleform {
             $mform->setType('name', PARAM_CLEAN);
         }
 
-        //Certificate image file
+        //User photo image file
         $mform->addElement('filepicker', 'userphoto', get_string('userphoto','customcertificate'), null,
             array('maxbytes' => 102400, 'accepted_types' =>  array('image')));
         $mform->addHelpButton('userphoto', 'userphoto', 'customcertificate');

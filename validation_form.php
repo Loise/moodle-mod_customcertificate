@@ -7,6 +7,11 @@ require_once($CFG->dirroot.'/lib/formslib.php');
 
 
 class validation_form extends moodleform {
+    /**
+     * Prepares creating the form with the addition of fields such as using a checkbox
+     *
+     * @return void
+     */
     public function definition() {
         global $CFG, $COURSE, $DB;
 

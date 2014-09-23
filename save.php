@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Verify an issued certificate by code
+ * Get an archive .zip of the certificate's issues 
  *
  * @package    mod
  * @subpackage customcertificate
- * @copyright  Carlos Fonseca <carlos.alexandre@outlook.com>
+ * @copyright  W3DevCampus/W3C <training@w3.org>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/locallib.php');

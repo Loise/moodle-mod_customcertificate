@@ -79,14 +79,14 @@ class mod_customcertificate_mod_form extends moodleform_mod {
         $mform->setAdvanced('certificatetexty');
         $mform->addHelpButton('certificatetexty', 'textposition', 'customcertificate');
 	
-	//Introduction Certificate Text HTML editor
+	    //Introduction Certificate Text HTML editor
         $mform->addElement('editor', 'introcertificatetext', get_string('introcertificatetext', 'customcertificate'),
                 customcertificate_get_editor_options($this->context));
         $mform->setType('introcertificatetext',PARAM_RAW);
         //$mform->addRule('introcertificatetext', get_string('error'), 'required', null, 'client');
         $mform->addHelpButton('introcertificatetext', 'introcertificatetext', 'customcertificate');
 
-	//Introduction Certificate Position X
+	    //Introduction Certificate Position X
         $mform->addElement('text', 'introcertificatetextx', get_string('introcertificatetextx', 'customcertificate'), array('size'=>'5'));
         $mform->setType('introcertificatetextx',PARAM_INT);
         $mform->setDefault('introcertificatetextx', get_config('customcertificate', 'introcertificatetextx'));
@@ -100,7 +100,7 @@ class mod_customcertificate_mod_form extends moodleform_mod {
         $mform->setAdvanced('introcertificatetexty');
         $mform->addHelpButton('introcertificatetexty', 'textposition', 'customcertificate');
 
-	//Conclusion Certificate Text HTML editor
+	    //Conclusion Certificate Text HTML editor
         $mform->addElement('editor', 'conclucertificatetext', get_string('conclucertificatetext', 'customcertificate'),
                 customcertificate_get_editor_options($this->context));
         $mform->setType('conclucertificatetext',PARAM_RAW);
@@ -175,11 +175,11 @@ class mod_customcertificate_mod_form extends moodleform_mod {
             file_prepare_draft_area($imagedraftitemid, $imagefileinfo['contextid'], $imagefileinfo['component'], $imagefileinfo['filearea'], $imagefileinfo['itemid']);
             $data['certificateimage'] = $imagedraftitemid;
             $data['certificatetext'] = array('text' =>$data['certificatetext'], 'format'=> FORMAT_HTML);
-	    $data['introcertificatetext'] = array('text' =>$data['introcertificatetext'], 'format'=> FORMAT_HTML); 
+	        $data['introcertificatetext'] = array('text' =>$data['introcertificatetext'], 'format'=> FORMAT_HTML); 
             $data['conclucertificatetext'] = array('text' =>$data['conclucertificatetext'], 'format'=> FORMAT_HTML); 
         } else { //Load default
             $data['certificatetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
-	    $data['introcertificatetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
+	        $data['introcertificatetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
             $data['secondpagetext'] = array('text' =>'', 'format'=> FORMAT_HTML);
         }
     }

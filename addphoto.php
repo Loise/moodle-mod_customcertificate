@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Verify an issued certificate by code
+ * Adding a user's photo by a form with a filepicker
  *
  * @package    mod
  * @subpackage customcertificate
- * @copyright  Carlos Fonseca <carlos.alexandre@outlook.com>
+ * @copyright  W3DevCampus/W3C <training@w3.org>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -21,13 +21,14 @@ $context = context_system::instance();
 $PAGE->set_url('/mod/customcertificate/addphoto.php', array('id' => $id));
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('base');
-
+// Add the form
 $mform = new addphoto_form($CFG->wwwroot.'/mod/customcertificate/addphoto.php?id='.$id);
 
 
 if (!$data = $mform->get_data()) {
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string('certificateaddphoto', 'customcertificate'));
+    //try if the filename have a special char
     if($retry == 1)
     {
         echo html_writer::tag('p', get_string('unknowchar', 'customcertificate'), array('style' => 'text-align:center'));
@@ -38,6 +39,7 @@ if (!$data = $mform->get_data()) {
     $mform->set_data(array('id'=>$id));
     echo $OUTPUT->footer();
 } else {
+    //Adding the user photo
     $fs = get_file_storage();
     $fileinfo=customcertificate::get_certificate_image_fileinfo($context->id);
     $fs->delete_area_files($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],$fileinfo['itemid']);
@@ -59,6 +61,7 @@ if (!$data = $mform->get_data()) {
     else
     {
         $imagefileuser = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $mform->get_new_filename('userphoto'));
+        //Creation of the dir for save the users photo
         $racine = "./pix/userphoto/";
         if(!is_dir($racine)){
             mkdir($racine, 0700);
@@ -76,10 +79,12 @@ if (!$data = $mform->get_data()) {
         $pattern = "#^[a-zA-Z0-9_.]+$#i";
         if (!(preg_match($pattern , $filename)))
         {
+            //refresh if the filename contains special char
             header("Refresh: 0; url=addphoto.php?id=".$id."&retry=1");
         }
         else
         {
+            //store the photo
             $fullfilepath = $racine.'/'.$userphoto->id . '/' . $filename;
             $imagefileuser->copy_content_to($fullfilepath);
 

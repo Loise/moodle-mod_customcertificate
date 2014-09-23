@@ -5,7 +5,7 @@
  *
  * @package    mod
  * @subpackage customcertificate
- * @copyright  Carlos Fonseca <carlos.alexandre@outlook.com>, Chardelle Busch, Mark Nelson <mark@moodle.com.au>
+ * @copyright  W3DevCampus/W3C <training@w3.org>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

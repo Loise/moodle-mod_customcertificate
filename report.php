@@ -5,9 +5,10 @@
  *
  * @package    mod
  * @subpackage customcertificate
- * @copyright  Mark Nelson <mark@moodle.com.au>
+ * @copyright  W3DevCampus/W3C <training@w3.org>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/locallib.php');

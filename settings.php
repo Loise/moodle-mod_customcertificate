@@ -5,7 +5,7 @@
  *
  * @package    mod
  * @subpackage customcertificate
- * @copyright  Carlos Alexandre S. da Fonseca <carlos.alexandre@outlook.com>
+ * @copyright  W3DevCampus/W3C <training@w3.org>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
