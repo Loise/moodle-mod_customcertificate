@@ -43,14 +43,14 @@ if ($ADMIN->fulltree) {
         get_string('addphoto', 'customcertificate'), get_string('addphoto_help', 'customcertificate'), 1));
 
     $settings->add(new admin_setting_configtext('customcertificate/addphotox', get_string('defaultaddphotox', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 50, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 220, PARAM_INT));
     $settings->add(new admin_setting_configtext('customcertificate/addphotoy', get_string('defaultaddphotoy', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 20, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 30, PARAM_INT));
 
     $settings->add(new admin_setting_configtext('customcertificate/addphotowidth', get_string('defaultaddphotowidth', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 40, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 30, PARAM_INT));
     $settings->add(new admin_setting_configtext('customcertificate/addphotoheight', get_string('defaultaddphotoheight', 'customcertificate'),
-        get_string('textposition_help', 'customcertificate'), 40, PARAM_INT));
+        get_string('textposition_help', 'customcertificate'), 30, PARAM_INT));
 
     $settings->add(new admin_setting_configselect('customcertificate/certdate', get_string('printdate', 'customcertificate'),
         get_string('printdate_help', 'customcertificate'), 2, customcertificate_get_date_options()));

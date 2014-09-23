@@ -168,6 +168,7 @@ $string['conclucertificatetext_help'] = 'This text will be used in the certifica
 
 In order to use custom profiles fields you must use a "PROFILE_" prefix. For example: you have created a custom profile with "birthday" as a shortname, so the text used on certificate must be {PROFILE_BIRTHDAY} 
 The text can use basic html, basic fonts, tables, but please avoid any position definition';
+$string['textposition'] = 'Position of the text in the certificate';
 $string['textposition_help'] = 'These are the XY coordinates (in millimeters) of the certificate text';
 $string['size'] = 'Certificate Size';
 $string['size_help'] = 'These are the Width and Height sizes (in millimeters) of the certificate, Default size is A4 Landscape';
