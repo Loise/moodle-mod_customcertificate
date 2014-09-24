@@ -223,8 +223,8 @@ $string['certificateverification'] = 'Certificate Verification';
 $string['certificateaddphoto'] = 'Add your photo (portrait)';
 $string['unknowchar'] = 'The file name contains special characters. Please fix that and and try again.';
 $string['emailvalidationphotosubject'] = '[Moodle] A user need a validation of photo !';
-$string['emailvalidationphotolink'] = 'You can validate the users\’ photos here: ';
-$string['emailvalidationphotolinkhtml'] = 'You can validate the users\’  photos at ';
+$string['emailvalidationphotolink'] = 'You can validate the users\' photos here: ';
+$string['emailvalidationphotolinkhtml'] = 'You can validate the users\'  photos at ';
 
 //Pending certificate page
 $string['pendingcertificate'] = 'The validation is pending';

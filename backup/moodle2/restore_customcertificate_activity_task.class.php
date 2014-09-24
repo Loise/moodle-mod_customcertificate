@@ -18,8 +18,8 @@
 /**
  * @package moodlecore
  * @subpackage backup-moodle2
- * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  W3DevCampus/W3C <training@w3.org>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -88,7 +88,7 @@ class restore_customcertificate_activity_task extends restore_activity_task {
         $rules[] = new restore_log_rule('customcertificate', 'received', 'report.php?a={customcertificate}', '{customcertificate}');
         $rules[] = new restore_log_rule('customcertificate', 'view report', 'report.php?id={customcertificate}', '{customcertificate}');
         $rules[] = new restore_log_rule('customcertificate', 'verifyt', 'verify.php?code={customcertificate_isse}', '{customcertificate}');
-        $rules[] = new restore_log_rule('customcertificate', 'addphoto', 'addphoto.php?id={customcertificate_isse}', '{customcertificate}');
+        $rules[] = new restore_log_rule('customcertificate', 'addphoto', 'addphoto.php?id={course_module}', '{customcertificate}');
 
         return $rules;
     }

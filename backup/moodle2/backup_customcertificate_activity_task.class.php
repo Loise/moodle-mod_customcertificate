@@ -18,8 +18,8 @@
 /**
  * @package moodlecore
  * @subpackage backup-moodle2
- * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  W3DevCampus/W3C <training@w3.org>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once($CFG->dirroot . '/mod/customcertificate/backup/moodle2/backup_customcertificate_stepslib.php'); // Because it exists (must)

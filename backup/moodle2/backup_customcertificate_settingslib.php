@@ -18,8 +18,8 @@
 /**
  * @package moodlecore
  * @subpackage backup-moodle2
- * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  W3DevCampus/W3C <training@w3.org>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
  // This activity has no particular settings but the inherited from the generic

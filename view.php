@@ -132,7 +132,9 @@ add_to_log($course->id, 'customcertificate', 'view', "view.php?id=$cm->id", $cer
 
 $linkpdf = $customcertificate->output_pdf($certrecord);
 
-echo '<a href="'.$linkpdf.'"" target="_blank">Get your certificate</a>';
+$url = '<a style="text-align:center;" href="'.$linkpdf.'" target="_blank">'.get_string('getcertificate', 'customcertificate').'</a>';
+echo html_writer::tag('p', $url, array('style' => 'text-align:center'));
+
 echo $OUTPUT->footer($course);
 exit;
 
